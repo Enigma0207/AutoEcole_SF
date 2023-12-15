@@ -1,0 +1,119 @@
+/* ...........POUR BASE HTML TWIG */
+.div2{
+    margin-left: 350px;
+}
+.div1{
+    margin-left: 20px;
+}
+
+.userForm{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+.userForm h4{
+    margin:10px 0 0 70px;
+}
+/* *************formulaire login */
+.login{
+    margin: auto;
+    width: 30%;
+    margin-top: 50px;
+    /* border: 1px rgb(133, 107, 107) solid; */
+    height: 150px;
+    background-color: rgba(80, 67, 52, 0.466);
+}
+.loginEmail{
+    margin-left: 10px;
+   padding-top: 20px;
+}
+.loginEmail input{
+    margin-left: 30px;
+}
+.loginmdp{
+    margin-left: 10px;
+   padding-top: 20px;
+}
+
+button{
+    margin-left: 330px;
+    margin-top: 15px;
+    border-radius: 7px;
+    
+
+}
+.ListUser{
+   width: 50%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    background-color: rgba(0, 255, 255, 0.137);
+}
+.permisForm{
+   width: 100%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    background-color: rgba(0, 255, 255, 0.137);
+    }
+
+/* .....................PERMISLISTE************** */
+td img{
+    width: 60%;
+    height: 50px;
+}
+
+/* permis liste */
+.racine{
+    width: 100%;
+    margin-top: 15px;
+}
+.racine h4{
+   margin-left: 550px;
+}
+.imgcard{
+    width: 50%;
+    border: 1px rgba(190, 180, 180, 0.281) solid;
+}
+.imgtext{
+    width: 50%;
+    border: 1px rgba(190, 180, 180, 0.281) solid;
+    padding-top: 0;
+    text-align: center;
+    padding-top: 8px;
+}
+.imgtext2{
+  padding: 0;
+  margin: 0;
+}
+
+.imgtext h5,p{
+   margin: 2px;
+   padding: 2px;
+
+}
+.ptext{
+   margin: 2px;
+   padding: 2px;
+    color: red;
+}
+
+.imgcard img{
+     height: 250px;
+     width: 100%;
+}
+.cardPermis{
+    width: 100%;
+    height: 250px;
+
+}
+.card{
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
+    
+
+}
+span{
+    color: red;
+}

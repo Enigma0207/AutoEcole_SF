@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Creneaux{% endblock %}
+
+{% block body %}
+    <h1>Create new Creneaux</h1>
+
+    {{ include('creneaux/_form.html.twig') }}
+
+    <a href="{{ path('app_creneaux_index') }}">back to list</a>
+{% endblock %}

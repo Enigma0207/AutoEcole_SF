@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello liste permis!{% endblock %}
+
+{% block body %}
+<div class="racine " >
+<h4>Nos Services</h4>
+    {% for permis1 in permis %}
+        <div class="card " >
+            <div class="row g-0 cardPermis">
+                <div class="col-md-4 imgcard">
+                    {% if permis1.image %}
+                        <img src="{{ asset('images/' ~ permis1.image) }}" alt="{{ permis1.id }}"  />
+                    {% else %}
+                        Pas d'image
+                    {% endif %}
+                </div>
+                <div class="col-md-8 imgtext">
+                    <div class="card-body imgtext2">
+                        <h5 class="card-title">{{ permis1.type | default('') | upper }}</h5>
+                        <p class="card-text ptext"><span>€</span>{{ permis1.price | default('') | upper }}</p>
+                        <p class="card-text">{{ permis1.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

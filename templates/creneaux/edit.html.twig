@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Creneaux{% endblock %}
+
+{% block body %}
+    <h1>Edit Creneaux</h1>
+
+    {{ include('creneaux/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_creneaux_index') }}">back to list</a>
+
+    {{ include('creneaux/_delete_form.html.twig') }}
+{% endblock %}

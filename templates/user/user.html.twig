@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire user!{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper userForm">
+        <h4>Formulaire d'inscription! ✅</h4>
+        {{ form_start(form) }}
+            
+        <div class="mb-1">
+            {{ form_row(form.firstname, {'label': "Prénom : ", 'attr': {
+                'class': 'form-control',
+                'placeholder': "Votre Prénom ..."
+            }}) }}
+        </div>
+           
+           <div class="mb-1">
+               {{ form_row(form.lastname, {'label': "Lastname : ", 'attr': {
+                   'class': 'form-control',
+                   'placeholder': "Nom..."
+               }}) }}
+           </div>
+           
+           <div class="mb-1">
+               {{ form_row(form.phone, {'label': "Phone : ", 'attr': {
+                   'class': 'form-control',
+                   'placeholder': "Phone..."
+               }}) }}
+           </div>
+           
+           <div class="mb-1">
+               {{ form_row(form.email, {'label': "Email: ", 'attr': {
+                   'class': 'form-control',
+                   'placeholder': "Votre Mail ..."
+               }}) }}
+           </div>
+           
+           <div class="mb-1">
+                {{ form_row(form.plainPassword, {'label': "Mot de passe : ", 'attr': {
+                    'class': 'form-control',
+                    'placeholder': "Votre Mot de passe ..."
+                }}) }}
+            </div>
+           
+                   <button type="submit" class="btn btn-success">S'inscrire</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+

@@ -1,0 +1,45 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire Permis{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper userForm">
+        {{ form_start(form) }}
+    
+            <h4>Formulaire de permis</h4>
+            {{ form_start(form) }}
+                
+            <div class="mb-1">
+                {{ form_row(form.type, {'label': "type : ", 'attr': {
+                    'class': 'form-control',
+                    'placeholder': "type ..."
+                }}) }}
+            </div>
+            <div class="mb-1">
+                {{ form_row(form.price, {'label': "price : ", 'attr': {
+                    'class': 'form-control',
+                    'placeholder': "price ..."
+                }}) }}
+            </div>
+            <div class="mb-1">
+                {{ form_label(form.description, 'Description : ', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_errors(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description ...'}}) }}
+            </div>
+             <div class="mb-1">
+                {{ form_row(form.image, {'label': "Image : ", 'attr': {
+                    'class': 'form-control',
+                }}) }}
+            </div>
+    
+            {# Affichage de l'image si elle existe #}
+            {% if form.vars.value.image is not null %}
+                <img src="{{ asset('images' ~ form.vars.value.image) }}" alt="Permis Image">
+            {% endif %}
+    
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
