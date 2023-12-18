@@ -1,20 +1,151 @@
 /* ...........POUR BASE HTML TWIG */
-.div2{
+/* .div2{
     margin-left: 350px;
 }
 .div1{
     margin-left: 20px;
+} */
+body{
+    background-color: rgba(160, 160, 167, 0.507);
+     margin: 0;
+  padding: 0;
+}
+/************** header **********************/
+header{
+  height: 100px;
+  background-color: rgba(1, 49, 1, 0.788);
+  width: 100%;
+  position: relative;
+ 
+}
+/* *************NAV********************** */
+nav{
+ display: flex;
+ justify-content: space-between;
+ margin: 0 15px;
+
 }
 
+/* **********autoEcole************ */
+.autoEcole{
+    margin-top: 13px;
+
+}
+.autoEcole a{
+     /*  supprimer le soulignement des liens a dans autoEcole  */
+    text-decoration: none;    
+
+}
+
+/* *************UL************************ */
+ul{
+ display: flex;
+    /* supprimer les puces sur les li */
+   list-style-type: none ; 
+}
+/* ************IL dans UL **********************/
+ul li{
+    margin-right: 10px;
+    
+}
+
+/* ************A dans UL ************************/
+ul li a{
+     /*  supprimer le soulignement des liens a  */
+ text-decoration: none;    
+}
+/* ************H3 dans HEADER ************************/
+h3{
+    /*  déplacer h3 par rapport header  */
+    position: absolute;
+    left: 550px;
+    bottom: 7px;
+}
+/* FORMULAIRE */
+/* FORMULAIRE USER */
+
 .userForm{
-    width: 50%;
+    width: 40%;
+    height: 300px;
+    background-color: rgba(160, 160, 167, 0.151);
     margin: auto;
     text-align: center;
+
 }
 .userForm h4{
     margin:10px 0 0 70px;
+    padding: 20px;
 }
-/* *************formulaire login */
+/*labelUser1 div pour label  */
+.labelUser1{
+    margin-bottom: 20px;
+
+}
+.labelUser2{
+    margin-bottom: 20px;
+}
+.labelUser3{
+    margin-bottom: 20px;
+
+}
+/*text_field class pour les imput */
+.text_field3{
+    margin-left: 30px;
+}
+.labelUser4{
+    margin-bottom: 20px;
+
+}
+.labelUser5{
+    margin-bottom: 20px;
+    margin-left: 34px;
+
+}
+.text_field4{
+    margin-left: 30px;
+}
+
+.btnUser{
+  /* margin-top: 30px; */
+  /* margin-left: 300px; */
+  position: relative;
+}
+.btnUser button{
+  position: absolute;
+  right: 10px;
+  background-color: rgba(160, 160, 167, 0.507);
+  border-radius: 5px 5px 5px 5px;
+   border: 1px solid transparent;
+}
+
+/* autres label et imput meme formulaire */
+
+.text_field{
+    margin-left: 10px;
+}
+/* ****************************LIST USER*******************************/
+.userGeneral h2{
+    text-align: center;
+    font-style: italic;
+    font-weight: bold; /* Met le texte en gras */
+    text-decoration: underline; /* Souligne le texte */
+}
+.usertable{
+  width: 60%;
+    height: 300px;
+    background-color: rgba(160, 160, 167, 0);
+    margin: auto;
+    text-align: center;  
+ 
+}
+th,td,tr,table{
+    border: solid rgba(14, 5, 5, 0.76) 1px;
+    border-collapse: collapse;
+} 
+th{
+    background-color: rgba(75, 75, 83, 0.151);
+}
+/* *************formulaire login ****************************
 .login{
     margin: auto;
     width: 30%;
@@ -35,13 +166,7 @@
    padding-top: 20px;
 }
 
-button{
-    margin-left: 330px;
-    margin-top: 15px;
-    border-radius: 7px;
-    
 
-}
 .ListUser{
    width: 50%;
     margin: auto;
@@ -64,11 +189,11 @@ td img{
 }
 
 /* permis liste */
-.racine{
+/* .racine{
     width: 100%;
     margin-top: 15px;
-}
-.racine h4{
+} */
+/* .racine h4{
    margin-left: 550px;
 }
 .imgcard{
@@ -117,3 +242,4 @@ td img{
 span{
     color: red;
 }
+
