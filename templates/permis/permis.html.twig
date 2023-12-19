@@ -5,62 +5,63 @@
 {% block title %}Formulaire Permis{% endblock %}
 
 {% block body %}
-    <div class="userForm">
+    <div class="permisForm">
         {{ form_start(form) }}
     
             <h4>Formulaire de permis</h4>
             {{ form_start(form) }}
-        <div class="labelUser1">
+        <div class="labelPermis1 divPermis">
         
             {{ form_label(form.type, null, {
                 'label': 'type',
-                'label_attr': {'class': 'text_label'}
+                'label_attr': {'class': 'text_labelPermis1'}
             }) }}
             {{ form_widget(form.type, {'attr': {
-                'class': 'text_field',
+                'class': 'text_fieldPermis1',
                 'placeholder': "type de permis ..."
             }}) }}
         </div>
-        <div class="labelUser1">
+        <div class="labelPermis2 divPermis">
         
             {{ form_label(form.price, null, {
                 'label': 'price',
-                'label_attr': {'class': 'text_label'}
+                'label_attr': {'class': 'text_labelPermis2'}
             }) }}
             {{ form_widget(form.price, {'attr': {
-                'class': 'text_field',
+                'class': 'text_fieldPermis2',
                 'placeholder': "le price ..."
             }}) }}
         </div>
-        <div class="labelUser1">
+        <div class="labelPermis3 divPermis">
         
             {{ form_label(form.description, null, {
                 'label': 'description',
-                'label_attr': {'class': 'text_label'}
+                'label_attr': {'class': 'text_labelPermis3'}
             }) }}
             {{ form_widget(form.description, {'attr': {
-                'class': 'text_field',
+                'class': 'text_fieldPermis3',
                 'placeholder': "la description ..."
             }}) }}
         </div>
-        <div class="labelUser1">
+        <div class="labelPermis4 divPermis">
         
             {{ form_label(form.image, null, {
                 'label': 'image',
-                'label_attr': {'class': 'text_label'}
+                'label_attr': {'class': 'text_labelPermis4'}
             }) }}
             {{ form_widget(form.image, {'attr': {
-                'class': 'text_field',
+                'class': 'text_fieldPermis4',
                 'placeholder': "description ..."
             }}) }}
         </div>
         
             {# Affichage de l'image si elle existe #}
             {% if form.vars.value.image is not null %}
-                <img src="{{ asset('images' ~ form.vars.value.image) }}" alt="Permis Image">
+                <img class="permis-image" src="{{ asset('images' ~ form.vars.value.image) }}" alt="Permis Image">
             {% endif %}
-    
-            <button type="submit" class="btn btn-success">Enregistrer</button>
+        <div class="btnPermis">
+            <button type="submit">Enregistrer</button>
+         </div>
         {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -4,26 +4,22 @@
 
 {% block body %}
 <div class="racine " >
-<h4>Nos Services</h4>
+    <h4>Nos Services</h4>
     {% for permis1 in permis %}
-        <div class="card " >
-            <div class="row g-0 cardPermis">
-                <div class="col-md-4 imgcard">
+            <div class=listPermis ">
+                <div class="imgcard">
                     {% if permis1.image %}
                         <img src="{{ asset('images/' ~ permis1.image) }}" alt="{{ permis1.id }}"  />
                     {% else %}
                         Pas d'image
                     {% endif %}
                 </div>
-                <div class="col-md-8 imgtext">
-                    <div class="card-body imgtext2">
-                        <h5 class="card-title">{{ permis1.type | default('') | upper }}</h5>
-                        <p class="card-text ptext"><span>€</span>{{ permis1.price | default('') | upper }}</p>
-                        <p class="card-text">{{ permis1.description }}</p>
-                    </div>
+                <div class="imgtext">
+                        <h4 class="cardtitle "><span style="color:red;">{{ permis1.type | default('') | upper }}</span></h4>
+                        <p class="cardtext">{{ permis1.description }}</p>
+                        <p class="cardtext hover-effect"><span style="color:red;">€{{ permis1.price | default('') | upper }}</span></p>
                 </div>
             </div>
-        </div>
     {% endfor %}
 </div>
 {% endblock %}
