@@ -201,6 +201,12 @@ th{
    border: 1px solid transparent;
 }
 /* ***************LISTE permis********************** */
+.generalPermis h4{
+    width: 50%;
+    margin: auto;
+    margin-right: 80px;
+   padding: 7px;
+}
 .listPermis{
     /* 60% d'ecrant */
     width: 60%;
@@ -227,101 +233,50 @@ th{
     width: 400px;
     height: 200px; 
 }
-/* *************formulaire login ****************************
-.login{
-    margin: auto;
+/* *************formulaire login ****************************/
+.alert {
+    /* pour message d'erreur */
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.loginForm{
     width: 30%;
-    margin-top: 50px;
-    /* border: 1px rgb(133, 107, 107) solid; 
-    height: 150px;
-    background-color: rgba(80, 67, 52, 0.466);
-}
-.loginEmail{
-    margin-left: 10px;
-   padding-top: 20px;
-}
-.loginEmail input{
-    margin-left: 30px;
-}
-.loginmdp{
-    margin-left: 10px;
-   padding-top: 20px;
-}
-
-
-.ListUser{
-   width: 50%;
+    height: 200px;
+    background-color: rgba(160, 160, 167, 0.151);
     margin: auto;
-    margin-top: 10px;
     text-align: center;
-    background-color: rgba(0, 255, 255, 0.137);
-}
-.permisForm{
-   width: 100%;
-    margin: auto;
-    margin-top: 10px;
-    text-align: center;
-    background-color: rgba(0, 255, 255, 0.137);
-    }
-
-/* .....................PERMISLISTE************** */
-/* td img{
-    width: 60%;
-    height: 50px;
-} */
-
-/* permis liste */
-/* .racine{
-    width: 100%;
-    margin-top: 15px;
-} */
-/* .racine h4{
-   margin-left: 550px;
-}
-.imgcard{
-    width: 50%;
-    border: 1px rgba(190, 180, 180, 0.281) solid;
-}
-.imgtext{
-    width: 50%;
-    border: 1px rgba(190, 180, 180, 0.281) solid;
-    padding-top: 0;
-    text-align: center;
-    padding-top: 8px;
-}
-.imgtext2{
-  padding: 0;
-  margin: 0;
-}
-
-.imgtext h5,p{
-   margin: 2px;
-   padding: 2px;
 
 }
-.ptext{
-   margin: 2px;
-   padding: 2px;
-    color: red;
-}
-
-.imgcard img{
-     height: 250px;
-     width: 100%;
-}
-.cardPermis{
-    width: 100%;
-    height: 250px;
+.loginForm h4{
+    margin:10px 0;
+    padding: 20px;
 
 }
-.card{
+
+.loginF1{
+    margin-bottom: 20px;
+
+}
+.loginF2{
+    margin-bottom: 20px;
+}
+.loginF3{
+    margin-bottom: 20px;
+
+}
+
+.loginForm h4{
+    margin:8px 0 0 40px;
+    padding: 20px;
+}
+.loginFormH2{
     width: 50%;
     margin: auto;
-    margin-top: 10px;
-    
-
+    margin-right: 120px;
+   padding: 7px;
 }
-span{
-    color: red;
-}
-

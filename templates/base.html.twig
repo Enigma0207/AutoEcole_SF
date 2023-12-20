@@ -7,9 +7,6 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"
     />
-   
-
-
   {% block stylesheets %}
     <link
       rel="stylesheet"
@@ -24,22 +21,18 @@
               <nav >
                     <div class="autoEcole" >
                        <a class="" href="#">Auto-Ecole</a>
-                       
                     </div>
                     <ul >
                       <li >
-                        <a  href="#">Home
-                        </a>
+                        <a  app_home>Home</a></li>
+                      <li >
+                        <a  href="{{path('app_user')}}">Register</a>
                       </li>
                       <li >
-                        <a  href="#">Register
-                        </a>
-                      </li>
-                      <li >
-                        <a  href="#">Login</a>
+                        <a  href="{{path('app_login')}}">Login</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">LogOut</a>
+                        <a class="nav-link"href="{{path('app_logout')}}">LogOut</a>
                       </li>
                       <li >
                         <a href="#">About</a>
