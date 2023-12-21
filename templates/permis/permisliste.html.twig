@@ -3,23 +3,45 @@
 {% block title %}Hello liste permis!{% endblock %}
 
 {% block body %}
-<div class="generalPermis " >
+<div class="generalPermis">
     <h4>La liste des permis</h4>
-    {% for permis1 in permis %}
-            <div class=listPermis ">
-                <div class="imgcard">
-                    {% if permis1.image %}
-                        <img src="{{ asset('images/' ~ permis1.image) }}" alt="{{ permis1.id }}"  />
-                    {% else %}
-                        Pas d'image
-                    {% endif %}
-                </div>
-                <div class="imgtext">
-                        <h4 class="cardtitle "><span style="color:red;">{{ permis1.type | default('') | upper }}</span></h4>
-                        <p class="cardtext">{{ permis1.description }}</p>
-                        <p class="cardtext hover-effect"><span style="color:red;">€{{ permis1.price | default('') | upper }}</span></p>
-                </div>
-            </div>
-    {% endfor %}
+    <table class="usertable">
+        {# <thead>
+            <tr>
+                <th>Image</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Prix</th>
+            </tr>
+        </thead> #}
+        <tbody>
+            {% for permis1 in permis %}
+                <tr >
+                   <td class="imgcard" rowspan="4">
+                        {% if permis1.image %}
+                            <img src="{{ asset('images/' ~ permis1.image) }}" alt="{{ permis1.id }}" />
+                        {% else %}
+                            Pas d'image
+                        {% endif %}
+                    </td> 
+                </tr>
+                 <tr>
+                    <td class="imgtext">
+                        {{ permis1.type }}
+                    </td>
+                </tr>
+                <tr  >
+                    <td>
+                        {{ permis1.description | default('') | upper }}
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                        {{ permis1.price | default('') | upper }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

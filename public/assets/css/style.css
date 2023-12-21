@@ -200,12 +200,20 @@ th{
   border-radius: 5px 5px 5px 5px;
    border: 1px solid transparent;
 }
-/* ***************LISTE permis********************** */
+/* ***************permisList********************** */
 .generalPermis h4{
     width: 50%;
     margin: auto;
     margin-right: 80px;
    padding: 7px;
+    font-style: italic;
+    font-weight: bold; /* Met le texte en gras */
+    text-decoration: underline;
+
+
+}
+#h4 {
+    text-decoration: underline;
 }
 .listPermis{
     /* 60% d'ecrant */
@@ -213,26 +221,60 @@ th{
     margin: auto;
     display: flex;
 }
+
+/* ***************HOME********************** */
+.generalHome h4{
+    width: 50%;
+    margin: auto;
+    margin-right: 80px;
+   padding: 7px;
+    font-style: italic;
+    font-weight: bold; /* Met le texte en gras */
+
+}
+
+#h4 {
+    text-decoration: underline;
+}
+.listHome{
+    /* 60% d'ecrant */
+    width: 60%;
+    margin: auto;
+    display: flex;
+}
 .imgcard{
-    /* 60% de listPermis */
+  
     width: 55%;
+    height: 180px;
 }
 .imgtext{
     width: 45%;
     background-color: rgba(160, 160, 167, 0.151);
     margin-bottom: 3px;
-        text-align: center;
-        padding: 0 10px;
+    text-align: center;
+    padding: 0 10px;
 }
 .cardtext.hover-effect:hover span {
     color: green;
     font-family: 'Nouvelle police', sans-serif;
 }
+.cardtext{
+      margin: 10px 0 0 0;
+
+}
 
 .imgcard img {
-    width: 400px;
-    height: 200px; 
+    width:100%;
+    height: 100%; 
 }
+#homeLien{
+    margin-left: 250px;
+    text-decoration: none;
+    padding: 1px;
+  background-color: rgba(160, 160, 167, 0.507);
+  border-radius:7% 7% 7% 7%;
+}
+
 /* *************formulaire login ****************************/
 .alert {
     /* pour message d'erreur */
