@@ -18,12 +18,20 @@ class SecurityController extends AbstractController
 
         if ($this->getUser()) {
             $userRoles = $this->getUser()->getRoles();
-            $welcomeMessage = "Bienvenue : " . implode(', ', $userRoles);
-            $this->addFlash('success', $welcomeMessage);
 
-            // Rediriger vers 'user_list' si l'utilisateur est connecté
-            return $this->redirectToRoute('app_userliste', ['firstname' => $this->getUser()->getFirstname()]);
+            // Redirection en fonction du rôle
+            if (in_array('ROLE_ELEVE', $userRoles)) {
+                return $this->redirectToRoute('app_permisliste');
+            } elseif (in_array('ROLE_MONITEUR', $userRoles)) {
+                return $this->redirectToRoute('app_permis');
+            } elseif (in_array('ROLE_ADMIN', $userRoles)) {
+                return $this->redirectToRoute('app_userliste', ['firstname' => $this->getUser()->getFirstname()]);
+            }
 
+            // Ajoutez d'autres redirections en fonction des rôles au besoin
+
+            // Par défaut, redirige vers une page par défaut
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('login/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);

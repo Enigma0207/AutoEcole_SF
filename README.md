@@ -202,7 +202,7 @@ class UserController extends AbstractController
         ]);
     }
 }
-*************************************************************************
+***************************CONNEXION**********************************************
 
 11 LoginController pour se connecter
 11.1 php bin/console make:controller Login
@@ -352,6 +352,7 @@ POUR AFFICHER L'IMAGE
             'form' => $form->createView(),
         ]);
     }
+*****************LES REDIRECTIONS CONNEXION*********************
 
 
 *****************************************************************
@@ -359,3 +360,4 @@ POUR AFFICHER L'IMAGE
 13.1 symfony console make:controller creneaux
 13.2 php bin/console make:form CreneauxFormType
 -Creneaux
+********************************************************************
