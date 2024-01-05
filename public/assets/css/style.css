@@ -322,3 +322,76 @@ th{
     margin-right: 120px;
    padding: 7px;
 }
+
+/* *************creneaux ****************************/
+/* *************creneauxList ****************************/
+
+.creneauxGeneral h2{
+    text-align: center;
+    font-style: italic;
+    font-weight: bold; /* Met le texte en gras */
+    text-decoration: underline; /* Souligne le texte */
+}
+.crenauxtable{
+  width: 60%;
+    height: 300px;
+    background-color: rgba(160, 160, 167, 0);
+    margin: auto;
+    text-align: center; 
+ 
+}
+.crenauxA{
+padding-top: 5px;
+    margin: auto;
+    width: 280px;
+    margin-right: 54px;
+}
+.crenauxtable a, .crenauxA a {
+     text-decoration: none; 
+     padding: 3px;
+     background-color: rgba(1, 49, 1, 0.788);
+     border-radius: 5px;
+     color: rgba(160, 160, 167, 0.507);
+
+}
+/* *************creneauxFormx ****************************/
+#creneaux{
+     width: 100%;
+    height: 150px;
+    background-color: rgba(160, 160, 167, 0.151);
+    margin: auto;
+    text-align: center; 
+    padding-top: 35px;
+}
+#creneaux_date{
+    margin-bottom: 12px;
+}
+#creneaux_permis{
+    margin-bottom: 12px; 
+}
+/*******************newGenerale******************** */
+.newGenerale{
+    width: 30%;
+    margin: auto;
+}
+.newGenerale h4{
+   margin-left: 100px;
+}
+.newGenerale a{
+   margin-left: 100px;
+   text-decoration: none;
+   position: relative;
+   bottom: 46px;
+   right: 90px;
+   color: black;
+   padding: 2px;
+   background-color: rgba(255, 255, 255, 0.616);
+   border-radius: 2px;
+  border: rgba(54, 54, 56, 0.39) solid 1px;
+
+}
+.btnFormCreneaux{
+    position: relative;
+   left: 330px;
+   bottom:22px;
+}

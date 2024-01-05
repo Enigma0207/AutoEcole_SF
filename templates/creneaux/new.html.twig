@@ -3,9 +3,11 @@
 {% block title %}New Creneaux{% endblock %}
 
 {% block body %}
+ <div class="newGenerale">
     <h4>Formulaire des Creneaux</h4>
 
     {{ include('creneaux/_form.html.twig') }}
 
-    <a href="{{ path('app_creneaux_index') }}">back to list</a>
+    <a href="{{ path('app_creneaux_index') }}">  <span>&#128412;</span>List</a>
+</div>
 {% endblock %}

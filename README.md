@@ -361,3 +361,7 @@ POUR AFFICHER L'IMAGE
 13.2 php bin/console make:form CreneauxFormType
 -Creneaux
 ********************************************************************
+
+ 'attr' => [
+                    'class' => 'creneauxChamps',
+                ],

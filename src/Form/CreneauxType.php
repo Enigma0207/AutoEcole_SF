@@ -1,4 +1,7 @@
 <?php
+// src/Form/CreneauxType.php
+
+// src/Form/CreneauxType.php
 
 namespace App\Form;
 
@@ -15,32 +18,23 @@ class CreneauxType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date') // Ajoutez le champ date
+            ->add('date', null, [
+            
+            ])
             ->add('permis', EntityType::class, [
                 'class' => Permis::class,
                 'label' => 'Type',
                 'choice_label' => 'type',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+               
             ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'label' => 'Élève',
-                'choice_label' => 'firstname',
-                'choices' => $options["eleve"],
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-            ])
+        
             ->add('user', EntityType::class, [
                 'class' => User::class,
                 'label' => 'Moniteur',
                 'choice_label' => 'firstname',
                 'choices' => $options["moniteur"],
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+                
+               
             ]);
     }
 
@@ -50,6 +44,8 @@ class CreneauxType extends AbstractType
             'data_class' => Creneaux::class,
             'moniteur' => null,
             'eleve' => null,
+           
+            
         ]);
     }
 }

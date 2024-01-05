@@ -3,35 +3,38 @@
 {% block title %}Creneaux index{% endblock %}
 
 {% block body %}
-    <h1>Creneaux index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>IsAvailable</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for creneaux in creneauxes %}
-            <tr>
-                <td>{{ creneaux.id }}</td>
-                <td>{{ creneaux.date ? creneaux.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ creneaux.isAvailable ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_creneaux_show', {'id': creneaux.id}) }}">show</a>
-                    <a href="{{ path('app_creneaux_edit', {'id': creneaux.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_creneaux_new') }}">Create new</a>
+    <div class=creneauxGeneral >
+        <h2>Creneaux List</h2>
+    
+        <table class="crenauxtable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Date</th>
+                    <th>IsAvailable</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for creneaux in creneauxes %}
+                <tr>
+                    <td>{{ creneaux.id }}</td>
+                    <td>{{ creneaux.date ? creneaux.date|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ creneaux.isAvailable ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('app_creneaux_show', {'id': creneaux.id}) }}">show</a>
+                        <a href="{{ path('app_creneaux_edit', {'id': creneaux.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="crenauxA" >
+               <a  href="{{ path('app_creneaux_new') }}">Create new</a>
+        </div>
+    </div>
 {% endblock %}
