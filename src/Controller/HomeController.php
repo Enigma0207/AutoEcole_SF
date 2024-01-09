@@ -20,4 +20,13 @@ class HomeController extends AbstractController
              'permis' => $permis,
         ]);
     }
+
+    #[Route('/home/{id}', name: 'app_detailMoto')]
+    public function detailMoto(PermisRepository $permisRepository, $id): Response
+    { 
+         $permis = $permisRepository->find($id);
+        return $this->render('home/detailMoto.html.twig', [
+            'permis' => $permis,
+        ]);
+    }
 }

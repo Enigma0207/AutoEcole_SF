@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="generalHome " >
+    <h4 id="h4">Nos Services</h4>
+    {% for home1 in permis %}
+            <div class=listHome ">
+                <div class="img-fluid">
+                   <img src="{{asset('public/images/' ~ home1.image)}}" alt="{{ home1.id }}">
+                </div>
+                <div class="imgtext">
+                        <h4 class="cardtitle "><span style="color:red;">{{ home1.type | default('') | upper }}</span></h4>
+                        <p class="cardtext">{{ home1.description }}</p>
+                        <a id="homeLien" href="{{ path('app_detailMoto', {'id': home1.id}) }}">choisir</a>
+
+                </div>
+            </div>
+    {% endfor %}        
+</div>
+{% endblock %}

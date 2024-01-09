@@ -7,6 +7,7 @@
     <h4 id="h4">Nos Services</h4>
     {% for home in permis %}
             <div class=listHome ">
+                
                 <div class="imgcard">
                     {% if home.image %}
                         <img src="{{ asset('images/' ~ home.image) }}" alt="{{ home.id }}"  />

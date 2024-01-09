@@ -28,14 +28,15 @@ nav{
 
 /* **********autoEcole************ */
 .autoEcole{
-    margin-top: 13px;
+    margin-top: 7px;
 
 }
-.autoEcole a{
-     /*  supprimer le soulignement des liens a dans autoEcole  */
-    text-decoration: none;    
+.autoEcole h2{
+    margin: 0;
+    color: rgba(85, 16, 85, 0.932);
 
 }
+
 
 /* *************UL************************ */
 ul{
@@ -60,6 +61,14 @@ h3{
     position: absolute;
     left: 550px;
     bottom: 7px;
+}
+header img{
+    position: absolute;
+    left: 550px;
+    bottom: 7px;
+    width:150px;
+    height: 80px;
+    border-radius: 3px;
 }
 /******************* FORMULAIRE **********************************/
 /**** FORMULAIRE USER ************/
