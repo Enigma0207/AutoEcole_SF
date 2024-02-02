@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello liste permis!{% endblock %}
+
+{% block body %}
+<div class="generalPermis">
+    <h4>La liste des permis</h4>
+    <table class="usertable">
+      
+        <tbody>
+            {% for permis1 in permis %}
+            
+                <tr >
+                   <td class="imgcard" rowspan="4">
+                        {% if permis1.image %}
+                            <img src="{{ asset('images/' ~ permis1.image) }}" alt="{{ permis1.id }}" />
+                        {% else %}
+                            Pas d'image
+                        {% endif %}
+                    </td> 
+                </tr>
+                 <tr>
+                    <td class="imgtext">
+                        {{ permis1.type }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="descriptionJusty">
+                        {{ permis1.description | default('') | upper }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ permis1.price | default('') | upper }}<span>€</span>
+                        
+                        <a class="btnPrix1" href="{{ path('app_edit_permis', {'id': permis1.id}) }}">Edit</a>
+                        <a class="btnPrix2" href="{{ path('app_permis_delete', {'id': permis1.id}) }}">Delete</a>
+                    </td>
+               </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

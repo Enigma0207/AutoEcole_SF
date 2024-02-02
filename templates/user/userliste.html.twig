@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}my list!{% endblock %} 
+{% block body %}
+    <div class="userGeneral">
+        <h2>Liste des Utilisateurs</h2>
+        <table class="usertable">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user1 in user %}
+                    <tr>
+                        <td>{{ user1.firstname | default('') | upper }}</td>
+                        <td>{{ user1.lastname | default('') | upper }}</td>
+                        <td>{{ user1.phone }}</td>
+                        <td>{{ user1.email }}</td>
+                        <td>
+                            {% if user1.roles is iterable %}
+                                {{ user1.roles | join(', ') }}
+                            {% else %}
+                                {{ user1.roles }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('app_edit_user', {'id': user1.id}) }}">Edit</a>
+                            <a href="{{ path('app_user_delete', {'id': user1.id}) }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,598 @@
+/* ...........POUR BASE HTML TWIG */
+
+body{
+    background-color: rgba(160, 160, 167, 0.507);
+     margin: 0;
+  padding: 0;
+}
+/************** header **********************/
+header{
+  height: 100px;
+  background-color: rgba(1, 49, 1, 0.788);
+  width: 100%;
+  position: relative;
+ 
+}
+/* *************NAV********************** */
+nav{
+ display: flex;
+ justify-content: space-between;
+ margin: 0 15px;
+
+}
+/******Nav ADMIN*************/
+.admin-link {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-list {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+           background-color: rgba(160, 160, 167, 0.507);
+            /* border: 1px solid #ccc; */
+            padding: 5px;
+            z-index: 1;
+        }
+
+        .admin-link:hover .dropdown-list {
+            display: block;
+        }
+
+        .dropdown-list a {
+            display: block;
+            padding: 2px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdown-list a:hover {
+            background-color: rgba(221, 221, 221, 0.349);
+            
+        }/* **********autoEcole************ */
+.autoEcole{
+    margin-top: 7px;
+
+}
+.autoEcole h2{
+    margin: 0;
+    color: rgba(85, 16, 85, 0.932);
+
+}
+
+
+/* *************UL************************ */
+ul{
+ display: flex;
+    /* supprimer les puces sur les li */
+   list-style-type: none ; 
+}
+/* ************IL dans UL **********************/
+ul li{
+    margin-right: 10px;
+    
+}
+
+/* ************A dans UL ************************/
+ul li a{
+     /*  supprimer le soulignement des liens a  */
+ text-decoration: none;    
+}
+/* ************H3 dans HEADER ************************/
+h3{
+    /*  déplacer h3 par rapport header  */
+    position: absolute;
+    left: 550px;
+    bottom: 7px;
+}
+header img{
+    position: absolute;
+    left: 550px;
+    bottom: 7px;
+    width:150px;
+    height: 80px;
+    border-radius: 3px;
+}
+/******************* FORMULAIRE **********************************/
+/**** FORMULAIRE USER ************/
+
+.userForm{
+    width: 40%;
+    height: 300px;
+    background-color: rgba(160, 160, 167, 0.151);
+    margin: auto;
+    text-align: center;
+
+}
+.userForm h4{
+    margin:10px 0 0 70px;
+    padding: 20px;
+}
+/*labelUser1 div pour label  */
+.labelUser1{
+    margin-bottom: 20px;
+
+}
+.labelUser2{
+    margin-bottom: 20px;
+}
+.labelUser3{
+    margin-bottom: 20px;
+
+}
+/*text_field class pour les imput */
+.text_field3{
+    margin-left: 30px;
+}
+.labelUser4{
+    margin-bottom: 20px;
+
+}
+.labelUser5{
+    margin-bottom: 20px;
+    margin-left: 34px;
+
+}
+.text_field4{
+    margin-left: 30px;
+}
+
+.btnUser{
+
+  position: relative;
+}
+.btnUser button{
+  position: absolute;
+  right: 10px;
+  background-color: rgba(160, 160, 167, 0.507);
+  border-radius: 5px 5px 5px 5px;
+   border: 1px solid transparent;
+}
+
+/* autres label et imput meme formulaire */
+
+.text_field{
+    margin-left: 10px;
+}
+/* ****************************LIST USER*******************************/
+.userGeneral h2{
+    text-align: center;
+    font-style: italic;
+    font-weight: bold; /* Met le texte en gras */
+    text-decoration: underline; /* Souligne le texte */
+}
+.usertable{
+  width: 60%;
+    height: 300px;
+    background-color: rgba(160, 160, 167, 0);
+    margin: auto;
+    text-align: center; 
+}
+.descriptionJusty{
+    text-align: justify;
+    padding:0 7px;
+}
+th,td,tr,table{
+    border: solid rgba(14, 5, 5, 0.76) 1px;
+    border-collapse: collapse;
+} 
+th{
+    background-color: rgba(75, 75, 83, 0.151);
+}
+/**** FORMULAIREPERMIS ************/
+.permisForm{
+    width: 40%;
+    height: 300px;
+    background-color: rgba(160, 160, 167, 0.151);
+    margin: auto;
+    text-align: center;
+
+}
+ .divPermis{
+     margin-bottom: 20px;
+ }
+.permisForm h4{
+    margin:10px 0;
+    padding: 20px;
+}
+.labelPermis1{
+    margin-left: 40px;
+}
+
+.text_labelPermis1{
+    margin-right: 40px;
+}
+
+.labelPermis2{
+    margin-left: 20px;
+}
+
+ .text_labelPermis2{
+    margin-left: 20px;
+} 
+
+.text_fieldPermis2{
+ margin-left: 20px;
+}
+
+.text_labelPermis3{
+    margin-left: 30px;
+}
+.text_fieldPermis3{
+    margin-bottom: -10px;
+}
+.text_labelPermis4{
+    margin-left: 90px;
+}
+.btnPermis{
+     position: relative;
+}
+
+.btnPermis button{
+  position: absolute;
+  right: 10px;
+  background-color: rgba(160, 160, 167, 0.507);
+  border-radius: 5px 5px 5px 5px;
+   border: 1px solid transparent;
+}
+/* ***************permisList********************** */
+.generalPermis h4{
+    width: 50%;
+    margin: auto;
+    margin-right: 80px;
+   padding: 7px;
+    font-style: italic;
+    font-weight: bold; /* Met le texte en gras */
+    text-decoration: underline;
+
+
+}
+#h4 {
+    text-decoration: underline;
+}
+.listPermis{
+    /* 60% d'ecrant */
+    width: 60%;
+    margin: auto;
+    display: flex;
+}
+.btnPrix1,.btnPrix2{
+    text-decoration: none;
+    padding: 1px;
+    background-color: rgba(160, 160, 167, 0.507);
+    border-radius:7% 7% 7% 7%;
+}
+
+/* ***************EditPermis********************** */
+/* (même css que formulaire du permis) */
+.btnPermisEdit{
+     position: relative;
+}
+
+.btnPermisEdit button{
+  position: absolute;
+  right: 10px;
+  background-color: rgba(160, 160, 167, 0.507);
+  border-radius: 5px 5px 5px 5px;
+   border: 1px solid transparent;
+}
+.btnPermisEdit a{
+   background-color: rgba(160, 160, 167, 0.507);
+   border-radius: 5px 5px 5px 5px;
+   border: 1px solid transparent;
+   margin-right: 440px;
+   text-decoration: none;
+   color: black;
+}
+/* ***************HOME********************** */
+
+.generalHome h4{
+    width: 50%;
+    margin: auto;
+    margin-right: 80px;
+   padding: 7px;
+    font-style: italic;
+    font-weight: bold; /* Met le texte en gras */
+
+}
+
+#h4 {
+    text-decoration: underline;
+     margin-right: 40px;
+}
+.listHome{
+    width: 60%;
+    margin: auto;
+    display: flex;
+}
+.imgcard{
+  
+    width: 55%;
+    height: 180px;
+    margin-bottom: 1px;
+    margin-right: 3px;
+}
+.imgtext{
+    width: 45%;
+    background-color: rgba(160, 160, 167, 0.151);
+    margin-bottom: 3px;
+    text-align: center;
+    padding: 0 10px;
+   
+}
+
+
+.imgcard img {
+    width:100%;
+    height: 99%; 
+    padding-bottom: 1px;
+}
+ #homeLien{
+    margin-left: 250px;
+    text-decoration: none;
+    padding: 1px;
+    background-color: rgba(160, 160, 167, 0.507);
+    border-radius:7% 7% 7% 7%;
+    position: relative;
+    top: 50px;
+ 
+}
+.detail{
+  background-color: rgba(160, 160, 167, 0.507);
+    border-radius:7% 7% 7% 7%;
+    position: relative;
+    top: 30px;
+    right: 120px;
+    text-decoration: none;
+}
+/* *********detail dans home**************** */
+
+.detailHome{
+   width: 30%;
+    margin: auto;
+    height: 40px;
+
+}
+.detailHome1{
+    padding-left: 15px;
+    border: solid 1px rgba(66, 66, 75, 0.13);
+    padding-bottom: 3px;
+  
+
+}
+.img-fluid{
+    border: solid 1px rgba(66, 66, 75, 0.274);
+
+}
+.detailHome img{
+   width: 100%;
+   height: 100%;
+   margin-bottom: -4px;
+
+}
+.datailH4{
+    margin: 0;
+    
+}
+.h4b{
+   position: relative;
+   left: 50px;
+    text-decoration: underline;
+}
+.retour{
+   text-decoration: none;
+   padding: 2px;
+   background-color: rgba(160, 160, 167, 0.507);
+   border-radius: 4px;
+   color: red;
+}
+
+/* *************formulaire login ****************************/
+.alert {
+    /* pour message d'erreur */
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.loginForm{
+    width: 30%;
+    height: 200px;
+    background-color: rgba(160, 160, 167, 0.151);
+    margin: auto;
+    text-align: center;
+
+}
+.loginForm h4{
+    margin:8px 0 0 40px;
+    padding: 20px;
+    padding: 20px;
+
+}
+
+.loginF1{
+    margin-bottom: 10px;
+
+}
+
+
+
+
+/* *************creneaux ****************************/
+
+/* *************creneauxList ****************************/
+
+.creneauxGeneral h2{
+    text-align: center;
+    font-style: italic;
+    font-weight: bold; /* Met le texte en gras */
+    text-decoration: underline; /* Souligne le texte */
+}
+.crenauxtable{
+  width: 60%;
+    height: 300px;
+    background-color: rgba(160, 160, 167, 0);
+    margin: auto;
+    text-align: center; 
+ 
+}
+.crenauxA{
+padding-top: 5px;
+    margin: auto;
+    width: 280px;
+    margin-right: 54px;
+}
+.crenauxtable a, .crenauxA a {
+     text-decoration: none; 
+     padding: 3px;
+     background-color: rgba(1, 49, 1, 0.788);
+     border-radius: 5px;
+     color: rgba(160, 160, 167, 0.507);
+
+}
+/* *************creneauxFormx ****************************/
+#creneaux{
+     width: 100%;
+    height: 150px;
+    margin: auto;
+    text-align: center; 
+    padding-top: 10px;
+}
+#creneaux_date{
+    margin-bottom: 12px;
+}
+#creneaux_permis{
+    margin-bottom: 12px; 
+}
+/*******************newGenerale******************** */
+.newGenerale{
+    width: 30%;
+    margin: auto;
+    background-color: rgba(160, 160, 167, 0.151);
+    height: 220px;
+}
+.newGenerale h4{
+   margin-left: 130px;
+   margin-bottom: 0px;
+   padding-top: 7px;
+}
+.newGenerale a{
+   margin-left: 100px;
+   text-decoration: none;
+   position: relative;
+   bottom: 46px;
+   right: 90px;
+   color: black;
+   padding: 2px;
+   background-color: rgba(255, 255, 255, 0.616);
+   border-radius: 2px;
+  border: rgba(54, 54, 56, 0.39) solid 1px;
+
+}
+.btnFormCreneaux{
+    position: relative;
+   left: 330px;
+   bottom:22px;
+}
+/* *******************SHOW CRENEAUX*************** */
+.showCreneaux{
+    width: 30%;
+    margin: auto;
+    text-align: center;  
+    background-color: rgba(160, 160, 167, 0.151);
+    height: 220px;
+    margin-top: 60px;
+    padding-top: 4px;
+
+}
+.showCreneaux table{
+     width:80%;
+    border: solid black 1px;
+    margin: auto;
+}
+.showCreneaux h4{
+   margin: 10px 0;
+}
+
+.btnShow{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5px;
+   
+}
+.btnShow a {
+   margin-right: 5px;
+   text-decoration: none;
+   color: black;
+   padding: 1px;
+   background-color: rgba(255, 255, 255, 0.616);
+   border-radius: 2px;
+  border: rgba(54, 54, 56, 0.39) solid 1px;
+  border-radius: 4px;
+}
+
+/*******************editGenerale******************** */
+.editGenerale{
+    width: 32%;
+    position: relative;
+    left: 450px;
+    background-color: rgba(160, 160, 167, 0.151);
+    margin-top: 40px;
+    height: 210px;
+    padding-top: 10px;
+    
+}
+.editGenerale h4{
+   /* margin-left: 150px; */
+   margin: 7px 0 7px 150px;
+}
+.btnEdit{
+ position: relative;
+ bottom: 70px;
+ left: 170px;
+  background-color: rgba(255, 255, 255, 0.616);
+   border-radius: 2px;
+  border: rgba(54, 54, 56, 0.39) solid 1px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: black;
+}
+
+.deleteFormContainer {
+    position: relative;
+    bottom: 45px; 
+    left: 20px;
+}
+.btnUpdate{
+    position: relative;
+    bottom: 24px;
+    left: 330px;
+}
+
+
+/************FOOTER**************** */
+footer{
+    height: 100px;
+    background-color: rgba(1, 49, 1, 0.788);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -3px;
+    align-items: center;
+    text-align: center;
+}
+ footer p{
+     margin: 1px;
+      font-size: 0.8em;
+ }
+ footer h4{
+     margin: 1px;
+ }
+ 
+

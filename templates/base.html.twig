@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"
+    />
+  {% block stylesheets %}
+    
+  
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    {% endblock %}
+     {% block javascripts %} {% endblock %}
+  </head>
+  <body>
+      <header>
+              <nav >
+                    <div class="autoEcole" >
+                       <h2>Auto-Ecole</h2>
+                    </div>
+                    <ul >
+                      <li >
+                        <a   href="{{path('app_home')}}">Home</a></li>
+                      <li>
+                          {% if app.user %}
+                            <a class="nav-link" href="{{ path('app_logout') }}">LogOut</a>
+                          {% else %}
+                            <a  href="{{path('app_user')}}">Register</a>
+                            <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                          {% endif %}
+                      </li>
+                      {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+                        <li class="nav-item">
+                            {# <div class="dropdown-menu">
+                                <a class="nav-link" href="{{ path('app_creneaux_new') }}">addCreneaux</a>
+                                <a class="nav-link" href="{{ path('app_permisliste') }}">permisList</a>
+                            </div> #}
+                             <div class="admin-link">
+                                <a href="#">Admin</a>
+                                <div class="dropdown-list">
+                                    <a class="nav-link" href="{{ path('app_creneaux_new') }}">addCreneaux</a>
+                                    <a class="nav-link" href="{{ path('app_creneaux_index') }}">CreneauList</a>
+                                    <a class="nav-link" href="{{ path('app_permis') }}">AddPermis</a>
+                                    <a class="nav-link" href="{{ path('app_permisliste') }}">PermisList</a>
+                                    <a class="nav-link" href="{{ path('app_user') }}">AddUser</a>
+                                    <a class="nav-link" href="{{ path('app_userliste') }}">UsersList</a>
+                                </div>
+                             </div>
+                        </li>
+                     {% endif %}
+                      <li >
+                        <a href="#">About</a>
+                      </li>
+                      <li >
+                        <a  href="#">Contact Us</a>
+                      </li>
+                    </ul>
+              </nav>
+              <img src="{{ asset('images/logoAutoEcole.png') }}" alt="">
+      </header>
+      
+    {% block body %}
+    {% endblock %}
+    {% block footer %}
+         <footer>
+           <div class=""><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2627.6851332319093!2d2.3446135769759042!3d48.80698777132531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e67171eb7abebb%3A0xf7f5a86814a88233!2s135%20Rue%20Gabriel%20P%C3%A9ri%2C%2094270%20Le%20Kremlin-Bic%C3%AAtre!5e0!3m2!1sfr!2sfr!4v1706861821512!5m2!1sfr!2sfr" width="150" height="96" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+           <div class="">
+             <h4>135 Rue Gabriel Péri le Kremlin-Bicêtre</h4>
+             <p>Batment Louis du Bois, apt A33</p>
+             <p>014545323228</p>
+           </div>
+           <div class="">About Us</div>
+   </footer>
+    {% endblock %}
+  </body>
+</html>
+ 

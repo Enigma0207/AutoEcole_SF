@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire user!{% endblock %}
+
+{% block body %}
+    <div class="userForm">
+        <h4>Please register! ✅</h4>
+        {{ form_start(form) }}
+            
+        <div class="labelUser1">
+        
+            {{ form_label(form.firstname, null, {
+                'label': 'firstname',
+                'label_attr': {'class': 'text_label'}
+            }) }}
+            {{ form_widget(form.firstname, {'attr': {
+                'class': 'text_field',
+                'placeholder': "Votre Prénom ..."
+            }}) }}
+        </div>
+
+        <div class="labelUser2">
+        
+            {{ form_label(form.lastname, null, {
+                'label': 'lastname',
+                'label_attr': {'class': 'text_label'}
+            }) }}
+            {{ form_widget(form.lastname, {'attr': {
+                'class': 'text_field',
+                'placeholder': "Votre Nom ..."
+            }}) }}
+        </div>
+      
+        
+        <div class="labelUser3">
+        
+            {{ form_label(form.phone, null, {
+                'label': 'phone',
+                'label_attr': {'class': 'text_label'}
+            }) }}
+            {{ form_widget(form.phone, {'attr': {
+                'class': 'text_field3',
+                'placeholder': "Votre numéro ..."
+            }}) }}
+        </div>
+        <div class="labelUser4">
+        
+            {{ form_label(form.email, null, {
+                'label': 'email',
+                'label_attr': {'class': 'text_label'}
+            }) }}
+            {{ form_widget(form.email, {'attr': {
+                'class': 'text_field4',
+                'placeholder': "Votre email ..."
+            }}) }}
+        </div>
+        
+        <div class="labelUser5">
+           {{ form_label(form.password, null, {
+                'label': 'plainPassword',
+                'label_attr': {'class': 'text_label'}
+            }) }}
+            {{ form_widget(form.password, {'attr': {
+                'class': 'text_field',
+                'placeholder': "Votre plainPassword ..."
+            }}) }}
+             
+        </div>
+        <div class="btnUser">
+                 <button type="submit" >S'inscrire</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+

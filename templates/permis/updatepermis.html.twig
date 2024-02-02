@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mettre à jour le permis{% endblock %}
+
+{% block body %}
+    <h2>Mettre à jour le permis</h2>
+    {{ form_start(form, {'method': 'POST'}) }}
+        
+
+        <button type="submit">Update</button>
+    {{ form_end(form) }}
+    
+    <a href="{{ path('app_permisliste') }}">list</a>
+{% endblock %}

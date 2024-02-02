@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du Permis{% endblock %}
+
+{% block body %}
+    <div class="generalHome">
+        <h4 class="h4b">Détail Permis</h4>
+        <div class="detailHome">
+            <div class="img-fluid">
+                <img src="{{ asset('images/' ~ permis.image) }}" alt="{{ permis.id }}">
+            </div>
+            <div class="detailHome1">
+                <h4 class="detailH4"><span style="color:red;">{{ home.type | default('') | upper }}</span></h4>
+                    <h2 class="datailH4"><span style="color:red;">€{{ permis.price | default('') | upper }}</span></h2>
+                <p class="cardtext">{{ permis.description }}</p>
+                <a class="retour" href="{{ path('app_home') }}">Retour</a>
+            </div>
+        </div>
+   </div>
+{% endblock %}

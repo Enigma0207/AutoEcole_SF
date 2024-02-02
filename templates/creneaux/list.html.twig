@@ -1,0 +1,74 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Creneaux index{% endblock %}
+
+{% block body %}
+    <div class="creneauxGeneral">
+        <h2>Creneaux List</h2>
+
+        <table class="crenauxtable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Is Available</th>
+                    <th>Moniteurs</th>
+                    {% if is_granted('ROLE_ELEVE') %}
+                        <th>ELEVE</th>
+                    {% else %}
+                        <th>Elèves</th>
+                    {% endif %}
+                    <th>Permis Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for creneau in creneauxes %}
+                    {% if creneau.isAvailable or creneau.userEleve.id is defined and creneau.userEleve.id == app.user.id or is_granted('ROLE_ADMIN') or is_granted('ROLE_MONITEUR') %}
+                        <tr>
+                            <td>{{ creneau.date ? creneau.date|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ creneau.isAvailable ? 'Yes' : 'No' }}</td>
+                            <td>{{ creneau.user is not null ? creneau.user.firstname : '' }}</td>
+                            
+                            {% if is_granted('ROLE_ELEVE') %}
+                                {% if creneau.userEleve.id is defined and creneau.userEleve.id == app.user.id %}
+                                    <td>{{ app.user.firstname }}</td>
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
+                            {% elseif is_granted('ROLE_ADMIN') or is_granted('ROLE_MONITEUR') %}
+                                <td>{{ creneau.userEleve.id is defined ? creneau.userEleve.firstname : '' }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+
+                            <td>{{ creneau.permis.type }}</td>
+                            <td>
+                                {% if 'ROLE_ADMIN' in app.user.roles %}
+                                    <a href="{{ path('app_creneaux_edit', {'id': creneau.id}) }}">Modifier</a>
+                                    <a href="{{ path('app_creneaux_show', {'id': creneau.id}) }}">Afficher</a>
+                                {% elseif 'ROLE_MONITEUR' in app.user.roles %}
+                                    {# <a href="{{ path('app_creneaux_show', {'id': creneau.id}) }}">Afficher</a> #}
+                                {% elseif 'ROLE_ELEVE' in app.user.roles %}
+                                    {% if creneau.isAvailable %}
+                                        <a href="{{ path('app_reserve_creneaux', {'id': creneau.id}) }}">Réserver</a>
+                                    {% else %}
+                                        <a href="{{ path('app_cancel', {'id': creneau.id}) }}">Annuler</a>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td colspan="7">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="crenauxA">
+            <a href="{{ path('app_creneaux_new') }}">Create new</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{# templates/creneaux/edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Creneaux{% endblock %}
+
+{% block body %}
+    <div class="editGenerale">
+        <h4>Edit Creneau</h4>
+      
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <button type="submit" class="btnUpdate">Update</button>
+        {{ form_end(form) }}
+
+        <div class="deleteFormContainer">
+            {{ include('creneaux/_delete_form.html.twig') }}
+        </div>
+
+        <a class="btnEdit" href="{{ path('app_creneaux_index') }}"><span>&#128412;</span>List</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+app_permis_delete:
+    path: '/deletepermis/{id}'
+    controller: 'App\Controller\PermisController::deletePermis'
+    methods: ['DELETE']
+
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+footer:
+    path: /footer
+    controller: App\Controller\FooterController::index
+
+redirect_to_footer:
+    path: /redirect-to-footer
+    controller: App\Controller\HomeController::redirectToFooter
+

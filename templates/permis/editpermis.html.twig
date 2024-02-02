@@ -1,0 +1,84 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Modifier les permis{% endblock %}
+
+{% block body %}
+ <div class="permisForm">
+    <h4>Modifier les permis</h4>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btnUpdate">Mettre à jour</button>
+    {{ form_end(form) }}
+    <a href="{{ path('app_permisliste') }}"><span>&#128412;</span>List</a>
+ </div>
+{% endblock %} #}
+
+{# *************************************************** #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les permis{% endblock %}
+
+{% block body %}
+    <div class="permisForm">
+        {{ form_start(form) }}
+    
+            <h4>Modifier les permis</h4>
+            {{ form_start(form) }}
+        <div class="labelPermis1 divPermis">
+        
+            {{ form_label(form.type, null, {
+                'label': 'type:',
+                'label_attr': {'class': 'text_labelPermis1'}
+            }) }}
+            {{ form_widget(form.type, {'attr': {
+                'class': 'text_fieldPermis1',
+                'placeholder': "type de permis ..."
+            }}) }}
+        </div>
+        <div class="labelPermis2 divPermis">
+        
+            {{ form_label(form.price, null, {
+                'label': 'price:',
+                'label_attr': {'class': 'text_labelPermis2'}
+            }) }}
+            {{ form_widget(form.price, {'attr': {
+                'class': 'text_fieldPermis2',
+                'placeholder': "le prix ..."
+            }}) }}
+        </div>
+        <div class="labelPermis3 divPermis">
+        
+            {{ form_label(form.description, null, {
+                'label': 'description:',
+                'label_attr': {'class': 'text_labelPermis3'}
+            }) }}
+            {{ form_widget(form.description, {'attr': {
+                'class': 'text_fieldPermis3',
+                'placeholder': "la déscription ..."
+            }}) }}
+        </div>
+        <div class="labelPermis4 divPermis">
+        
+            {{ form_label(form.image, null, {
+                'label': 'image:',
+                'label_attr': {'class': 'text_labelPermis4'}
+            }) }}
+            {{ form_widget(form.image, {'attr': {
+                'class': 'text_fieldPermis4',
+                'placeholder': "description ..."
+            }}) }}
+        </div>
+        
+            {# Affichage de l'image si elle existe #}
+            {% if form.vars.value.image is not null %}
+                <img class="permis-image" src="{{ asset('images' ~ form.vars.value.image) }}" alt="Permis Image">
+            {% endif %}
+        <div class="btnPermisEdit">
+            <button type="submit" >Mettre à jour</button>
+            <a class="btnListPerlis" class href="{{ path('app_permisliste') }}"><span>&#128412;</span>List</a>
+         </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="generalHome " >
+      <h4 id="h4">Nos Services</h4>
+        {% for home in permis %}
+            <div class=listHome ">
+                
+                <div class="imgcard">
+                    {% if home.image %}
+                        <img src="{{ asset('images/' ~ home.image) }}" alt="{{ home.id }}"  />
+                    {% else %}
+                        Pas d'image
+                    {% endif %}
+                </div>
+                <div class="imgtext">
+                        <h4 class="cardtitle "><span style="color:red;">{{ home.type | default('') | upper }}</span></h4>
+                        <h2 class="cardtext hover-effect"><span style="color:red;">€{{ home.price | default('') | upper }}</span></h2>
+                        <a id="homeLien" href="{{path('app_user')}}">choisir</a>
+                        <a class="detail" href="{{ path('app_detail', {'id': home.id}) }}">détail</a>
+                </div>
+            </div>
+        {% endfor %}
+</div>
+{% endblock %}
