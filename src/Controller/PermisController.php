@@ -59,7 +59,7 @@ class PermisController extends AbstractController
         ]);
     }
 
-      #[Route('/editpermis/{id}', name: 'app_edit_permis')]
+    #[Route('/editpermis/{id}', name: 'app_edit_permis')]
     public function editPermis(Request $request, Permis $permis, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PermisFormType::class, $permis);

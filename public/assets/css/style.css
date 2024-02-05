@@ -554,10 +554,9 @@ padding-top: 5px;
 }
 .btnEdit{
  position: relative;
- bottom: 70px;
- left: 170px;
+ bottom: 45px;
+ left: 30px;
   background-color: rgba(255, 255, 255, 0.616);
-   border-radius: 2px;
   border: rgba(54, 54, 56, 0.39) solid 1px;
   border-radius: 4px;
   text-decoration: none;

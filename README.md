@@ -412,45 +412,58 @@ security:
 
         
     }
+    //Cette annotation Symfony indique que cette méthode doit être appelée lorsqu'une requête est faite à l'URL '/permisliste'. Le nom 'app_permisliste' est l'identifiant unique de cette route.
     #[Route('/permisliste', name: 'app_permisliste')]
+    //Définit une méthode publique appelée permisliste qui prend comme paramètre une instance de PermisRepository et renvoie une instance de Response.
+
+    //récupérer la liste de tous les objets "Permis" à partir du PermisRepository et de les passer à une vue Twig pour affichage.
     public function permisliste(PermisRepository $permisRepository): Response
     {
+        //Appelle la méthode findAll du PermisRepository pour récupérer tous les enregistrements de la table des permis depuis la base de données et le stocker dans  $permis.
         $permis = $permisRepository->findAll();
 
+        // reponse de la methode et ici $this->render  indique au contrôleur de rendre la vue Twig'permis/permisliste.html.twig'  responsable de l'affichage de la liste des objets "Permis".
         return $this->render('permis/permisliste.html.twig', [
             'controller_name' => 'PermisController',
+            //C'est la liste des objets "Permis" récupérée à partir du PermisRepository
             'permis' => $permis,
+            //C'est le tableau associatif passé à la vue Twig
         ]);
     }
 
       #[Route('/editpermis/{id}', name: 'app_edit_permis')]
     public function editPermis(Request $request, Permis $permis, EntityManagerInterface $entityManager): Response
-    {
+    { //Création du formulaire : Un formulaire basé sur la classe PermisFormType est créé, associé à l'objet "Permis" actuel.
         $form = $this->createForm(PermisFormType::class, $permis);
+        // Gère la requête HTTP pour mettre à jour le formulaire
         $form->handleRequest($request);
-
+         // Vérifie si le formulaire a été soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                // Récupère le fichier téléchargé depuis le formulaire
                 $uploadedFile = $form->get('image')->getData();
+                // Si un fichier a été téléchargé, procède au traitement
                 if ($uploadedFile) {
+                    // Génère un nouveau nom de fichier unique basé sur le hachage MD5 et l'extension du fichier
                     $newFilename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
-
+                // Déplace le fichier téléchargé vers le répertoire configuré pour les images
                     $uploadedFile->move(
                         $this->getParameter('images_directory'),
                         $newFilename
                     );
-
+                // Met à jour le champ "image" de l'objet Permis avec le nouveau nom de fichier
                     $permis->setImage($newFilename);
                 }
-
+                // Applique les modifications à l'objet Permis en base de données
                 $entityManager->flush();
-
+                // Redirige l'utilisateur vers la liste des permis après la modification
                 return $this->redirectToRoute('app_permisliste');
             } catch (FileException $e) {
+                // Gère les erreurs liées au traitement du fichier (par exemple, s'il y a un problème de déplacement du fichier)
                 $this->addFlash('error', 'Une erreur s\'est produite lors de la mise à jour du fichier.');
             }
         }
-
+         // Si le formulaire n'est pas soumis ou n'est pas valide, affiche le formulaire d'édition
         return $this->render('permis/editpermis.html.twig', [
             'controller_name' => 'PermisController',
             'form' => $form->createView(),
@@ -460,27 +473,33 @@ security:
     #[Route('/updatepermis/{id}', name: 'app_update_permis')]
     public function updatePermis(Request $request, Permis $permis): Response
     {
+        // Crée un formulaire basé sur le PermisFormType et le Permis actuel
         $form = $this->createForm(PermisFormType::class, $permis);
+        //Gère la requête HTTP pour mettre à jour le formulaire
         $form->handleRequest($request);
-
+        // Vérifie si le formulaire a été soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                // Récupère le fichier téléchargé depuis le formulaire
                 $uploadedFile = $form->get('image')->getData();
+                // Si un fichier a été téléchargé, procède au traitement
                 if ($uploadedFile) {
+                    // Génère un nouveau nom de fichier unique basé sur le hachage MD5 et l'extension du fichier
                     $newFilename = md5(uniqid()) . '.' . $uploadedFile->guessExtension();
-
+                // Déplace le fichier téléchargé vers le répertoire configuré pour les images
                     $uploadedFile->move(
                         $this->getParameter('images_directory'),
                         $newFilename
                     );
-
+                // Met à jour le champ "image" de l'objet Permis avec le nouveau nom de fichier
                     $permis->setImage($newFilename);
                 }
-
+            // Applique les modifications à l'objet Permis en base de données
                 $this->getDoctrine()->getManager()->flush();
-
+            // Redirige l'utilisateur vers la liste des permis après la modification
                 return $this->redirectToRoute('app_permisliste');
             } catch (FileException $e) {
+                // Gère les erreurs liées au traitement du fichier (par exemple, s'il y a un problème de déplacement du fichier)
                 $this->addFlash('error', 'Une erreur s\'est produite lors de la mise à jour du fichier.');
             }
         }
@@ -492,16 +511,19 @@ security:
     }
     
     #[Route('/deletepermis/{id}', name: 'app_permis_delete')]
+    
     public function deletePermis(Request $request, PermisRepository $permis, EntityManagerInterface $entityManager,$id): Response
     {
-           $deletePermis = $permis->find($id);
-    
+        Utilisation du PermisRepository pour rechercher l'objet "Permis" à supprimer en fonction de son identifiant ($id).
+        $deletePermis = $permis->find($id);
+        // Vérifie si l'objet Permis a été trouvé
         if($deletePermis){
+            // Supprime l'objet Permis
             $entityManager->remove($deletePermis);
+            // Applique la suppression en base de données
             $entityManager->flush();
         }
-    
-    
+        // Redirige l'utilisateur vers la liste des permis après la suppression
         return $this->redirectToRoute('app_permisliste', [], Response::HTTP_SEE_OTHER);
     }
 
@@ -594,6 +616,7 @@ POUR AFFICHER L'IMAGE
 *****************LES REDIRECTIONS CONNEXION*********************
 
 
+
 *****************************************************************
 13. FORMULAIRE CRENEAUX
 13.1synfony console make:crud creneaux // générer automatiquement le contrôleur, les fichiers de vue, le formulaire, etc., pour effectuer les opérations CRUD sur l'entité sélectionnée. mais il faut deja avoir l'entité Creneaux
@@ -663,6 +686,195 @@ class CreneauxType extends AbstractType
     {{ form_widget(form) }}  //En résumé, ce code génère un formulaire HTML complet à partir d'un objet form Symfony.
     <button class="btnFormCreneaux">{{ button_label|default('Save') }}</button> //le bouton qui sera affiché sur votre formulaire, et le texte du bouton dépend du libellé spécifié dans votre contrôleur
 {{ form_end(form) }}
+13.4 Dans CRENEAUCONTROLLER
+  <?php
+
+namespace App\Controller;
+
+use App\Entity\Creneaux;
+use App\Form\CreneauxType;
+use App\Repository\CreneauxRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('/creneaux')]
+class CreneauxController extends AbstractController
+{
+    
+
+    #[Route('/', name: 'app_creneaux_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+    <!-- //UserRepository $userRepository: C'est probablement un repository (classe gérant la récupération des entités depuis la base de données) lié à l'entité User. Repositories sont souvent utilisés pour effectuer des requêtes personnalisées pour récupérer des entités depuis la base de données. Dans ce cas, le repository est utilisé pour obtenir la liste des utilisateurs ayant des rôles spécifiques. -->
+    {
+
+    //Récupération des moniteurs et élèves : La méthode utilise le UserRepository pour récupérer deux listes d'utilisateurs : les moniteurs et les élèves pour creer le formulaire de creneaux 
+        $moniteur = $userRepository->getUsersByRole('ROLE_MONITEUR');
+        $eleve = $userRepository->getUsersByRole('ROLE_ELEVE');
+        // dd($moniteur);
+
+        //on crée un nouvel objet Creneaux 
+        $creneaux = new Creneaux();
+        //On crée le formulaire associé (CreneauxType::class). Les listes de moniteurs et d'élèves sont passées en option lors de la création du formulaire.
+        $form = $this->createForm(CreneauxType::class, $creneaux, ["moniteur" => $moniteur, "eleve"=>$eleve]);
+        //pour traiter la requête HTTP.
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //si le formulaire est soumis et validé
+            $entityManager->persist($creneaux);
+            //l'objet $creneaux est marqué ou préparé pour la bdd
+            $entityManager->flush();
+            //effectue réellement cette opération, en insérant l'objet dans la base de données.
+
+            return $this->redirectToRoute('app_creneaux_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('creneaux/new.html.twig', [
+            'creneaux' => $creneaux,
+            'form' => $form,
+        ]);
+    }
+*****************************
+    #[Route('/list', name: 'app_creneaux_index', methods: ['GET'])]
+    public function index(CreneauxRepository $creneauxRepository): Response
+    //cette méthode utilise l'url(list) avec name unique(app_creneaux_index) recupère tous les objets Creneaux grace au repository et le stock dans $creneauxes et de les passer à une vue Twig pour affichage
+    { 
+        $creneauxes = $creneauxRepository->findAll();
+        return $this->render('creneaux/list.html.twig', [
+            'creneauxes' => $creneauxRepository->findAll(),
+        ]);
+    }
+*****************************
+    //Symfony utilise l'injection de dépendance automatique pour injecter l'objet Creneaux directement en fonction de l'identifiant {id} spécifié dans l'URL.
+    #[Route('/{id}', name: 'app_creneaux_show', methods: ['GET'])]
+    public function show(Creneaux $creneaux): Response
+    //L'objet $creneaux est automatiquement récupéré à partir de la base de données par Symfony en utilisant le paramètre {id} de l'URL.
+    {
+        return $this->render('creneaux/show.html.twig', [
+            //L'objet Creneaux récupéré est passé à la vue en tant que variable 'creneaux'
+            'creneaux' => $creneaux,
+        ]);
+    }
+    
+***************************
+    #[Route('/{id}/edit', name: 'app_creneaux_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Creneaux $creneaux, EntityManagerInterface $entityManager): Response
+    {
+        // Création du formulaire basé sur la classe CreneauxType et l'objet Creneaux
+        $form = $this->createForm(CreneauxType::class, $creneaux);
+         // La méthode handleRequest est utilisée pour gérer la soumission du formulaire et extraire les données du formulaire de la requête.
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Vérification si le formulaire est soumis et valide
+            $entityManager->flush();
+            // Mise à jour de l'objet Creneaux dans la base de données
+            la méthode $entityManager->flush() est appelée pour mettre à jour l'objet Creneaux enregistré en base de données.
+
+            return $this->redirectToRoute('app_creneaux_index', [], 
+            // Redirection vers la liste des Creneaux après la mise à jour
+            Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('creneaux/edit.html.twig', [
+            'creneaux' => $creneaux,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_creneaux_delete', methods: ['POST'])]
+    public function delete(Request $request, Creneaux $creneaux, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$creneaux->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($creneaux);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_creneaux_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/update', name: 'app_creneaux_update', methods: ['POST'])]
+    public function update(Request $request, Creneaux $creneaux, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(CreneauxType::class, $creneaux);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+    
+            // Ajoutez une instruction dump pour déboguer
+            dump('Redirection effectuée');
+    
+            return $this->redirectToRoute('app_creneaux_index', [], Response::HTTP_SEE_OTHER);
+        }
+    
+        return $this->render('creneaux/updateCreneaux.html.twig', [
+            'creneaux' => $creneaux,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/creneaux/{id}/reserve', name: 'app_reserve_creneaux', methods: ['GET'])]
+    public function reserveCreneaux(Creneaux $creneaux, EntityManagerInterface $entityManager): Response
+    {
+        // Vérifiez si la plage horaire est disponible
+        if ($creneaux->isIsAvailable()) {
+            // Mettez à jour la plage horaire comme réservée
+            $creneaux->setIsAvailable(false);
+    
+            // Définissez l'élève qui a réservé la plage horaire 
+            $user = $this->getUser(); // Supposons que vous avez implémenté l'authentification de l'utilisateur
+            $creneaux->setUserEleve($user);
+    
+            $entityManager->flush();
+    
+            // Redirigez vers la page de la liste ou toute autre page appropriée
+            return $this->redirectToRoute('app_creneaux_index');
+        }
+    
+        // Gérez le cas où la plage horaire est déjà réservée
+        // Vous voudrez peut-être personnaliser cette partie en fonction de vos besoins
+        $this->addFlash('error', 'Cette plage horaire est déjà réservée.');
+    
+        // Redirigez vers la page de la liste ou toute autre page appropriée
+        return $this->redirectToRoute('app_creneaux_index');
+    }
+
+    #[Route('/creneaux/{id}/cancel', name: 'app_cancel', methods: ['GET'])]
+    public function cancel(Creneaux $creneaux, EntityManagerInterface $entityManager): Response
+    {
+        // Vérifiez si l'utilisateur connecté a réservé cette plage horaire
+        $user = $this->getUser();
+        if ($user && $creneaux->getUserEleve() === $user) {
+            // Annulez la réservation en mettant à jour la plage horaire comme disponible
+            $creneaux->setIsAvailable(true);
+            $creneaux->setUserEleve(null); // Définissez l'élève comme null
+    
+            $entityManager->flush();
+    
+            // Redirigez vers la page de la liste ou toute autre page appropriée
+            return $this->redirectToRoute('app_creneaux_index');
+        }
+    
+        // Gérez le cas où l'utilisateur n'est pas autorisé à annuler cette réservation
+        // Vous pouvez personnaliser cette partie en fonction de vos besoins
+        $this->addFlash('error', 'Vous n\'êtes pas autorisé à annuler cette réservation.');
+    
+        // Redirigez vers la page de la liste ou toute autre page appropriée
+        return $this->redirectToRoute('app_creneaux_index');
+}
+
+
+}
+
+   
+
+
+
 
 **************NEW CRENEAUX********************
 

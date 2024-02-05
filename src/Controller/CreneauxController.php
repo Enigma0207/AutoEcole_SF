@@ -44,6 +44,7 @@ class CreneauxController extends AbstractController
     #[Route('/list', name: 'app_creneaux_index', methods: ['GET'])]
     public function index(CreneauxRepository $creneauxRepository): Response
     {
+        $creneauxes = $creneauxRepository->findAll();
         return $this->render('creneaux/list.html.twig', [
             'creneauxes' => $creneauxRepository->findAll(),
         ]);
@@ -51,7 +52,7 @@ class CreneauxController extends AbstractController
 
     #[Route('/{id}', name: 'app_creneaux_show', methods: ['GET'])]
     public function show(Creneaux $creneaux): Response
-    {
+    { 
         return $this->render('creneaux/show.html.twig', [
             'creneaux' => $creneaux,
         ]);
@@ -87,7 +88,7 @@ class CreneauxController extends AbstractController
         return $this->redirectToRoute('app_creneaux_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/update', name: 'app_creneaux_update', methods: ['POST'])]
+    #[Route('/{id}/update', name: 'app_creneaux_update', methods: ['GET', 'POST'])]
     public function update(Request $request, Creneaux $creneaux, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CreneauxType::class, $creneaux);
