@@ -20,6 +20,7 @@
                         <th>Elèves</th>
                     {% endif %}
                     <th>Permis Type</th>
+                    <th>Price:€</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -44,6 +45,7 @@
                             {% endif %}
 
                             <td>{{ creneau.permis.type }}</td>
+                            <td>{{ creneau.permis.price }}</td>
                             <td>
                                 {% if 'ROLE_ADMIN' in app.user.roles %}
                                     <a href="{{ path('app_creneaux_edit', {'id': creneau.id}) }}">Modifier</a>
@@ -52,7 +54,7 @@
                                     {# <a href="{{ path('app_creneaux_show', {'id': creneau.id}) }}">Afficher</a> #}
                                 {% elseif 'ROLE_ELEVE' in app.user.roles %}
                                     {% if creneau.isAvailable %}
-                                        <a href="{{ path('app_reserve_creneaux', {'id': creneau.id}) }}">Réserver</a>
+                                        <a href="{{ path('add_to_cart', {'id': creneau.id}) }}">Réserver</a>
                                     {% else %}
                                         <a href="{{ path('app_cancel', {'id': creneau.id}) }}">Annuler</a>
                                     {% endif %}

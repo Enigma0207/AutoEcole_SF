@@ -44,7 +44,7 @@ class CreneauxController extends AbstractController
     #[Route('/list', name: 'app_creneaux_index', methods: ['GET'])]
     public function index(CreneauxRepository $creneauxRepository): Response
     {
-        $creneauxes = $creneauxRepository->findAll();
+        // $creneauxes = $creneauxRepository->findAll();
         return $this->render('creneaux/list.html.twig', [
             'creneauxes' => $creneauxRepository->findAll(),
         ]);
@@ -157,10 +157,41 @@ class CreneauxController extends AbstractController
     
         // Redirigez vers la page de la liste ou toute autre page appropriée
         return $this->redirectToRoute('app_creneaux_index');
+    }
 }
 
 
-}
+
+// ***********************************************
+
+
+
+//     #[Route('/creneaux/{id}/cancel', name: 'app_cancel', methods: ['GET'])]
+//     public function cancel(Creneaux $creneaux, EntityManagerInterface $entityManager): Response
+//     {
+//         // Vérifiez si l'utilisateur connecté a réservé cette plage horaire
+//         $user = $this->getUser();
+//         if ($user && $creneaux->getUserEleve() === $user) {
+//             // Annulez la réservation en mettant à jour la plage horaire comme disponible
+//             $creneaux->setIsAvailable(true);
+//             $creneaux->setUserEleve(null); // Définissez l'élève comme null
+    
+//             $entityManager->flush();
+    
+//             // Redirigez vers la page de la liste ou toute autre page appropriée
+//             return $this->redirectToRoute('app_creneaux_index');
+//         }
+    
+//         // Gérez le cas où l'utilisateur n'est pas autorisé à annuler cette réservation
+//         // Vous pouvez personnaliser cette partie en fonction de vos besoins
+//         $this->addFlash('error', 'Vous n\'êtes pas autorisé à annuler cette réservation.');
+    
+//         // Redirigez vers la page de la liste ou toute autre page appropriée
+//         return $this->redirectToRoute('app_creneaux_index');
+// }
+
+
+// *************************************************
 
    
 

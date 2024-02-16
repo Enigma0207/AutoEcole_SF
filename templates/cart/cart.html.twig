@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block body %}
+<h3>Mon Panier</h3>
+{% if totalQuantity > 0 %}
+    <a href="{{ path('remove_cart') }}" title="Supprimer tous les articles" class="btn btn-outline-danger btn-sm float-right">
+        <i class="bi bi-x"></i> 
+        Réinitialiser mon panier
+    </a>
+{% endif %}
+
+<p>Voici les creneaux que vous avez ajoutés</p>
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Type de permis</th>
+            <th scope="col">Moniteur</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Price</th>
+            {# <th class="text-center" scope="col">Quantité</th> #}
+            {# <th scope="col">Total</th> #}
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+        <tr>
+            
+            <td class="align-middle">{{item.creneau.date|date("m/d/Y")}}</td>
+            <td class="align-middle">{{item.creneau.permis.type}}</td>
+            <td class="align-middle">{{item.creneau.user.firstname}}</td>
+            <td class="text-center align-middle">
+                <a title="Enlever 1 article" href="{{ path('decrease_item', {id:item.creneau.id}) }}"><i class="bi bi-dash"></i></a>
+                {{ item.quantity }} 
+                <a title="Ajouter 1 article" href="{{ path('add_to_cart', {id:item.creneau.id}) }}"><i class="bi bi-plus"></i></a>
+            </td>
+            <td class="align-middle">{{ (item.quantity * (item.creneau.permis.price / 100))|number_format(2,',','.') }} €</td>
+
+            <td class="align-middle"><a title="Supprimer tous les articles de cette ligne" href="{{ path('remove_cart_item', {id: item.creneau.id}) }}" class="text-danger"href=""><i class="bi bi-trash"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <th>Total</th>
+        <td></td>
+        <td></td>
+        <td class="text-center">  <small>x</small> {{ totalQuantity }}</td>
+        <th>{{ (totalPrice / 100)|number_format(2,',','.') }} €</th>
+        <td></td>
+    </tfoot>
+</table>
+<a href="{{ path('app_creneaux_index') }}">Continuez mes achats</a>
+<a href="{{ path('app_reserve_creneaux', {'id': creneau.id}) }}">valider</a>
+
+
+{# {% if totalQuantity > 0 %}
+        <a href="{{ path('order')}}"title="Valider puis passer au paiement" class="btn btn-outline-success btn-block"></i> Valider mon panier</a>
+{% else %}
+        Votre panier est vide, remplissez le depuis la page <a href="{{ path('app_creneaux_index') }}">creneaux</a>.
+{% endif %} #}
+
+
+{% endblock %}

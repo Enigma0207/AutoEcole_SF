@@ -739,20 +739,30 @@ class CreneauxController extends AbstractController
         ]);
     }
 *****************************
+<!-- Cette annotation indique que cette méthode (index) est associée à la route /list. Le nom de la route est 'app_creneaux_index', et elle répond uniquement aux requêtes HTTP de type GET. -->
     #[Route('/list', name: 'app_creneaux_index', methods: ['GET'])]
     public function index(CreneauxRepository $creneauxRepository): Response
-    //cette méthode utilise l'url(list) avec name unique(app_creneaux_index) recupère tous les objets Creneaux grace au repository et le stock dans $creneauxes et de les passer à une vue Twig pour affichage
+   //Cette méthode est appelée lorsque l'utilisateur accède à l'URL /list de l'application.
+   En tant que paramètre, elle reçoit un objet $creneauxRepository de type CreneauxRepository. Symfony injecte automatiquement cette dépendance en utilisant son système d'injection de dépendances.
     { 
+        //La méthode utilise le $creneauxRepository pour appeler la méthode findAll(). Cela récupère tous les créneaux disponibles dans la base de données(c'est une liste des creneaux qui sera stocker dans $creneauxes )
+
         $creneauxes = $creneauxRepository->findAll();
+        
         return $this->render('creneaux/list.html.twig', [
             'creneauxes' => $creneauxRepository->findAll(),
+            //La méthode render est utilisée pour afficher une vue(Un tableau associatif est passé à la vue, avec la clé 'creneauxes' contenant la liste des créneaux), ici 'creneaux/list.html.twig'.
+ 
         ]);
     }
 *****************************
+<!-- Cette annotation indique que cette méthode (show) est associée à une route dynamique qui accepte un paramètre {id} dans l'URL. Le nom de la route est 'app_creneaux_show', et elle répond uniquement aux requêtes HTTP de type GET. -->
     //Symfony utilise l'injection de dépendance automatique pour injecter l'objet Creneaux directement en fonction de l'identifiant {id} spécifié dans l'URL.
+
     #[Route('/{id}', name: 'app_creneaux_show', methods: ['GET'])]
     public function show(Creneaux $creneaux): Response
-    //L'objet $creneaux est automatiquement récupéré à partir de la base de données par Symfony en utilisant le paramètre {id} de l'URL.
+    //La méthode show prend en paramètre un objet $creneaux de type Creneaux. Symfony injecte automatiquement cet objet en fonction de la valeur de l'ID fournie dans l'URL. Cela signifie que Symfony va chercher dans la base de données le créneau correspondant à l'ID donné et l'injecter dans cette méthode.
+
     {
         return $this->render('creneaux/show.html.twig', [
             //L'objet Creneaux récupéré est passé à la vue en tant que variable 'creneaux'
@@ -760,17 +770,20 @@ class CreneauxController extends AbstractController
         ]);
     }
     
-***************************
+*******************************************************
+<!-- Cette annotation indique que cette méthode (edit) est associée à la route /quelquechose/edit, où quelquechose est remplacé par une valeur d'ID spécifique. Le nom de la route est 'app_creneaux_edit', et elle répond aux requêtes HTTP de type GET et POST. -->
     #[Route('/{id}/edit', name: 'app_creneaux_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Creneaux $creneaux, EntityManagerInterface $entityManager): Response
     {
         // Création du formulaire basé sur la classe CreneauxType et l'objet Creneaux
         $form = $this->createForm(CreneauxType::class, $creneaux);
+
          // La méthode handleRequest est utilisée pour gérer la soumission du formulaire et extraire les données du formulaire de la requête.
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Vérification si le formulaire est soumis et valide
+
             $entityManager->flush();
             // Mise à jour de l'objet Creneaux dans la base de données
             la méthode $entityManager->flush() est appelée pour mettre à jour l'objet Creneaux enregistré en base de données.
@@ -785,31 +798,55 @@ class CreneauxController extends AbstractController
             'form' => $form,
         ]);
     }
-
+<!-- Cette annotation indique que cette méthode (delete) est associée à la route /quelquechose, où quelquechose est remplacé par une valeur d'ID spécifique. Le nom de la route est 'app_creneaux_delete', et elle répond uniquement aux requêtes HTTP de type POST. -->
     #[Route('/{id}', name: 'app_creneaux_delete', methods: ['POST'])]
+    //$request: C'est un objet représentant la requête HTTP, utilisé pour récupérer les données de la requête.
+     $creneaux: C'est un objet de type Creneaux qui est automatiquement injecté par Symfony en fonction de l'ID fourni dans l'URL.
+     $entityManager: C'est un objet responsable de la gestion des entités et de l'interaction avec la base de données.
+
     public function delete(Request $request, Creneaux $creneaux, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$creneaux->getId(), $request->request->get('_token'))) {
+            <!-- En résumé, cette ligne de code vérifie que le jeton CSRF soumis avec la requête POST correspond à celui généré lors de la création du formulaire d'origine. Si les deux jetons correspondent, cela signifie que la demande de suppression est légitime -->
+            //isCsrfTokenValid() est une méthode fournie par Symfony qui permet de vérifier si un jeton CSRF est valide.
+
+            //'delete'.$creneaux->getId()' : Cette partie crée une clé unique pour le jeton CSRF en concaténant le mot 'delete' avec l'ID du créneau ($creneaux->getId()). Cela permet d'assurer que le jeton CSRF est spécifique à cette action de suppression particulière
+            //$request->request->get('_token') : Cette partie récupère la valeur du jeton CSRF soumis avec la requête POST. Le jeton CSRF est généralement inclus dans le formulaire HTML sous le nom _token.
+
             $entityManager->remove($creneaux);
+
+            //Enregistre les changements (la suppression de l'entité Creneaux) dans la base de données.
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_creneaux_index', [], Response::HTTP_SEE_OTHER);
     }
+<!-- Cette annotation indique que cette méthode (update) est associée à la route /quelquechose/update, où quelquechose est remplacé par une valeur d'ID spécifique. Le nom de la route est 'app_creneaux_update', et elle répond aux requêtes HTTP de type GET et POST.
+$request: C'est un objet représentant la requête HTTP, utilisé pour récupérer les données de la requête.
 
+$creneaux: C'est un objet de type Creneaux qui est automatiquement injecté par Symfony en fonction de l'ID fourni dans l'URL.
+
+$entityManager: C'est un objet responsable de la gestion des entités et de l'interaction avec la base de données. -->
     #[Route('/{id}/update', name: 'app_creneaux_update', methods: ['POST'])]
     public function update(Request $request, Creneaux $creneaux, EntityManagerInterface $entityManager): Response
     {
+        //Crée un formulaire basé sur le type CreneauxType et le lie à l'objet $creneaux. Cela pré-remplit le formulaire avec les données existantes du créneau.
+
         $form = $this->createForm(CreneauxType::class, $creneaux);
+        //Traite la requête HTTP pour remplir le formulaire avec les données soumises.
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
+            //Vérifie si le formulaire a été soumis et s'il est valide.
+
             $entityManager->flush();
+            //Si le formulaire est valide, les changements sont enregistrés dans la base de données avec $entityManager->flush();
     
             // Ajoutez une instruction dump pour déboguer
             dump('Redirection effectuée');
     
             return $this->redirectToRoute('app_creneaux_index', [], Response::HTTP_SEE_OTHER);
+            //Redirige l'utilisateur vers la liste des créneaux après la mise à jour réussie.
         }
     
         return $this->render('creneaux/updateCreneaux.html.twig', [
@@ -817,65 +854,6 @@ class CreneauxController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    #[Route('/creneaux/{id}/reserve', name: 'app_reserve_creneaux', methods: ['GET'])]
-    public function reserveCreneaux(Creneaux $creneaux, EntityManagerInterface $entityManager): Response
-    {
-        // Vérifiez si la plage horaire est disponible
-        if ($creneaux->isIsAvailable()) {
-            // Mettez à jour la plage horaire comme réservée
-            $creneaux->setIsAvailable(false);
-    
-            // Définissez l'élève qui a réservé la plage horaire 
-            $user = $this->getUser(); // Supposons que vous avez implémenté l'authentification de l'utilisateur
-            $creneaux->setUserEleve($user);
-    
-            $entityManager->flush();
-    
-            // Redirigez vers la page de la liste ou toute autre page appropriée
-            return $this->redirectToRoute('app_creneaux_index');
-        }
-    
-        // Gérez le cas où la plage horaire est déjà réservée
-        // Vous voudrez peut-être personnaliser cette partie en fonction de vos besoins
-        $this->addFlash('error', 'Cette plage horaire est déjà réservée.');
-    
-        // Redirigez vers la page de la liste ou toute autre page appropriée
-        return $this->redirectToRoute('app_creneaux_index');
-    }
-
-    #[Route('/creneaux/{id}/cancel', name: 'app_cancel', methods: ['GET'])]
-    public function cancel(Creneaux $creneaux, EntityManagerInterface $entityManager): Response
-    {
-        // Vérifiez si l'utilisateur connecté a réservé cette plage horaire
-        $user = $this->getUser();
-        if ($user && $creneaux->getUserEleve() === $user) {
-            // Annulez la réservation en mettant à jour la plage horaire comme disponible
-            $creneaux->setIsAvailable(true);
-            $creneaux->setUserEleve(null); // Définissez l'élève comme null
-    
-            $entityManager->flush();
-    
-            // Redirigez vers la page de la liste ou toute autre page appropriée
-            return $this->redirectToRoute('app_creneaux_index');
-        }
-    
-        // Gérez le cas où l'utilisateur n'est pas autorisé à annuler cette réservation
-        // Vous pouvez personnaliser cette partie en fonction de vos besoins
-        $this->addFlash('error', 'Vous n\'êtes pas autorisé à annuler cette réservation.');
-    
-        // Redirigez vers la page de la liste ou toute autre page appropriée
-        return $this->redirectToRoute('app_creneaux_index');
-}
-
-
-}
-
-   
-
-
-
-
 **************NEW CRENEAUX********************
 
 *************LIST CRENEAU****************
@@ -947,6 +925,202 @@ confirm('Are you sure you want to delete this item?') affiche une boîte de dial
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ creneaux.id) }}">
     <button class="btn">Delete</button>
 </form>
+*********************PANIER******************************
+-CART CONTROLLER:
+A.index:pour afficher le panier
+//Définit l'URL à laquelle cette méthode du contrôleur répond (/mon-panier) et le nom de la route (cart).
+
+#[Route('/mon-panier', name: 'cart')]
+    public function index(Cart $cart): Response
+    {
+        //La méthode $cart->getDetails()  est appelée pour obtenir les détails du panier, y compris les créneaux, la quantité totale et le prix total.. Cette méthode a été définie dans la classe Cart.
+
+        $cartCreneaux = $cart->getDetails();
+
+        return $this->render('cart/cart.html.twig', [
+            //'cart' : les créneaux dans le panier ($cartCreneaux['creneaux']).
+            'cart' => $cartCreneaux['creneaux'],
+           //la quantité totale des créneaux dans le panier 
+            'totalQuantity' => $cartCreneaux['totals']['quantity'],
+            //le prix total des créneaux dans le panier
+            'totalPrice' =>$cartCreneaux['totals']['price']
+        ]);
+        Résumé:En résumé, cette méthode récupère les détails du panier à l'aide du service Cart et rend une vue Twig pour afficher ces détails, y compris les créneaux présents dans le panier, la quantité totale et le prix total.
+    }
+****************************************************
+-SERVICE:
+       1Les services sont classe ou des objets réutilisables(dans différentes parties de l'application) qui effectuent des opérations spécifiques, telles que la manipulation de la base de données, l'envoi d'e-mails, l'interaction avec des services tiers
+       2. peuvent dépendre d'autres services ou de composants(ingection des dépendances)
+
+       Dans notre cas:Ce service Symfony, appelé Cart, est conçu pour gérer un panier en session dans une application
+14.CARTCONTROLLER
+14.1 php bin/console make:controller CartController
+//il me crée deux dossiers et fichiers:
+-src/Controller/CartController.php
+-templates/cart/cart.html.twig
+*************************************************
+  <?php
+namespace App\Service;
+
+use App\Repository\CreneauxRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
+
+  //la classe Cart qui gère un panier en session dans une application Symfony.
+ 
+class Cart 
+
+{
+    private $requestStack;
+    private $repository;
+    //ces deux proprietés sont(private), ce qui signifie qu'elles ne sont directement accessibles que depuis l'intérieur de la classe Cart. Cela suit le principe d'encapsulation, où les détails internes d'une classe sont cachés à l'extérieur de celle-ci, et l'accès à ces détails se fait via des méthodes publiques ou des accesseurs (getters et setters) définis dans la classe.
+
+   //Constructeur : Le constructeur est appelé lorsqu'une instance de la classe Cart est créée. Il prend deux paramètres en injection de dépendances :  
+
+    //$requestStack : C'est un service Symfony qui permet d'accéder à la requête actuelle et à la session associée.
+     $repository : C'est une instance de CreneauxRepository,  Le repository est utilisé pour interagir avec la base de données Doctrine et récupérer des informations sur les créneaux..
+Ces dépendances sont nécessaires pour interagir avec la session et la base de données.
+
+
+
+    public function __construct(RequestStack $requestStack, CreneauxRepository $repository)
+    {
+        $this->requestStack = $requestStack;
+        $this->repository = $repository;
+    }
+    /**
+     * Crée un tableau associatif id => quantité et le stocke en session
+     *
+     * @param int $id
+     * @return void
+     */
+    public function addToCart(int $id):void
+    {
+        // manière de récupérer le contenu de la session associée à l'objet RequestStack dans Symfony,
+        //1. $this->requestStack:on référence à la propriété $requestStack de l'objet courant ($this)contenat l'instance de la classe RequestStack.
+        2.->getSession():La méthode getSession() de l'objet RequestStack renvoie l'objet Session associé à la requête actuelle
+        3.->get('cart', []) : La méthode get('cart', []) est utilisée pour  récupère le tableau associatif stocké dans la session sous la clé 'cart'. Si cette clé n'existe pas, la valeur par défaut est un tableau vide []
+
+        $cart = $this->requestStack->getSession()->get('cart', []);
+        
+        if (empty($cart[$id])) {
+            //si l'element identifié n"xiste pas dans le panier,donner la valeur 1 à la quantité
+            $cart[$id] = 1;
+            //si cela existe deja dans le panier, ajouter à la qté existante
+        } else {
+            $cart[$id]++;
+        }
+        //Cette ligne met à jour la session en remplaçant l'ancien panier par le nouveau panier modifié. La méthode set est utilisée pour associer le tableau $cart à la clé 'cart' dans la session.
+        $this->requestStack->getSession()->set('cart', $cart);
+
+    }
+    /**
+     * Récupère le panier en session
+     *
+     * @return array
+     */
+     //1.$this->requestStack:permet d'acceder à la session
+     2.getSession(): recupere la session
+     3.->get('cart');:recupererle contenu du panier stocker dans la session
+    public function get(): array
+    {
+        return $this->requestStack->getSession()->get('cart');
+    }
+    /**
+     * Supprime entièrement le panier en session
+     *
+     * @return void
+     */
+
+     //1.$this->requestStack->getSession() : Récupère l'objet de session associé à la requête en cours. 
+       2.->remove('cart') : Cela utilise la méthode remove('cart') pour supprimer complètement la clé 'cart' de la session.
+
+    public function remove(): void
+    {
+        $this->requestStack->getSession()->remove('cart');
+    }
+    /**
+     * Supprime entièrement un produit du panier (quelque soit sa quantité)
+     *
+     * @param int $id
+     * @return void
+     */
+
+     //1.$cart = $this->requestStack->getSession()->get('cart', []);:Récupère le panier actuel depuis la session Symfony. Si le panier n'existe pas, un tableau vide est utilisé par défaut. 
+     //2.unset($cart[$id]): utilise la fonction unset pour supprimer l'élément du panier associé à l'ID spécifié. 
+     //3. $this->requestStack->getSession()->set('cart', $cart) :pour obtenir l'objet de session associé à la requête actuelle. Ensuite, la méthode set est utilisée pour mettre à jour la variable de session 'cart' avec le tableau du panier modifié.
+
+    public function removeItem(int $id): void
+    {
+        $cart = $this->requestStack->getSession()->get('cart', []);
+        unset($cart[$id]);
+        $this->requestStack->getSession()->set('cart', $cart);
+    }
+    /**
+     * Diminue de 1 la quantité d'un produit
+     *
+     * @param int $id
+     * @return void
+     */
+
+     //1.decreaseItem:Elle gère la diminution de la quantité d'un produit plutôt que la suppression totale
+     //2.$cart = $this->requestStack->getSession()->get('cart', []);:Récupère le panier actuel depuis la session Symfony. Si le panier n'existe pas, un tableau vide est utilisé par défaut. 
+     3.Si la quantité du produit est inférieure à 2, l'élément lié a l'id est complètement supprimé.
+     4.sinon décremente le
+     5.$this->requestStack->getSession()->set('cart', $cart):on obtient l'objet de session associé à la requête actuelle. Ensuite, la méthode set est utilisée pour mettre à jour la variable de session 'cart' avec le tableau du panier modifié.
+
+    public function decreaseItem(int $id): void
+    {
+        $cart = $this->requestStack->getSession()->get('cart', []);
+        if ($cart[$id] < 2) {
+            $this->requestStack->getSession();
+            unset($cart[$id]);
+        } else {
+            $cart[$id]--;
+        }
+        $this->requestStack->getSession()->set('cart', $cart);
+    }
+    /**
+     * Récupère le panier en session, puis récupère les objets produits de la bdd
+     * et calcule les totaux
+     *
+     * @return array
+     */
+    public function getDetails(): array
+    {
+        //Un tableau vide est initialisé pour stocker les détails du panier. Il contient deux clés : 'creneaux' pour stocker les créneaux du panier, et 'totals' pour stocker la quantité totale et le prix total des créneaux.
+        $cartCreneaux = [
+            'creneaux' => [],
+            'totals' => [
+                'quantity' => 0,
+                'price' => 0,
+            ],
+        ];
+     //// Récupération du panier depuis la session Symfony avec la method get
+        $cart = $this->requestStack->getSession()->get('cart', []);
+        if ($cart) {
+            //Une boucle foreach parcourt chaque élément du panier, où chaque élément correspond à une paire clé-valeur (ID du créneau et quantité).
+            foreach ($cart as $id => $quantity) {
+                //Pour chaque ID du panier, la méthode $this->repository->find($id)rechercher le créneau associé dans le repository
+
+                $currentCreneau = $this->repository->find($id);
+
+                //Si le créneau est trouvé, ses détails (objet $currentCreneau) sont ajoutés au tableau 'creneaux' avec la quantité correspondante.
+                if ($currentCreneau) {
+                    $cartCreneaux['creneaux'][] = [
+                        'creneau' => $currentCreneau,
+                        'quantity' => $quantity
+                    ];
+                    //Les totaux 'quantity' et 'price' du panier sont mis à jour en fonction de la quantité et du prix du créneau actuel.
+
+                    $cartCreneaux['totals']['quantity'] += $quantity;
+                    $cartCreneaux['totals']['price'] += $quantity * $currentCreneau->getPermis()->getPrice();
+                }
+            }
+        }
+        return $cartCreneaux;
+    }
+}
+************************************************
 ************************************GIT **********************************
 1. git add .
 2. git commit -m "suite"
