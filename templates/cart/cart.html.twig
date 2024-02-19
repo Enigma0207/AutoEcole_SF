@@ -10,10 +10,10 @@
         Réinitialiser mon panier
     </a>
 {% endif %}
+<div>
 
 <p>Voici les creneaux que vous avez ajoutés</p>
-
-<table class="table mt-5">
+<table class="panier">
     <thead>
         <tr>
             <th scope="col">Date</th>
@@ -54,7 +54,8 @@
     </tfoot>
 </table>
 <a href="{{ path('app_creneaux_index') }}">Continuez mes achats</a>
-<a href="{{ path('app_reserve_creneaux', {'id': creneau.id}) }}">valider</a>
+<a href="{{ path('app_creneaux_validate') }}">valider</a>
+</div>
 
 
 {# {% if totalQuantity > 0 %}

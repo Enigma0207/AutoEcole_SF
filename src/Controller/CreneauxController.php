@@ -2,20 +2,20 @@
 
 namespace App\Controller;
 
+use App\Service\Cart;
 use App\Entity\Creneaux;
 use App\Form\CreneauxType;
-use App\Repository\CreneauxRepository;
 use App\Repository\UserRepository;
+use App\Repository\CreneauxRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/creneaux')]
 class CreneauxController extends AbstractController
-{
-    
+{   
 
     #[Route('/', name: 'app_creneaux_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
@@ -135,6 +135,34 @@ class CreneauxController extends AbstractController
         return $this->redirectToRoute('app_creneaux_index');
     }
 
+    #[Route('/creneaux/validate', name: 'app_creneaux_validate', methods: ['GET'])]
+    public function validateCreneaux(EntityManagerInterface $entityManager, Cart $cart): Response
+    {
+        $cartCreneaux = $cart->getDetails();
+        $creneaux = $cartCreneaux['creneaux'];
+        
+        foreach($creneaux as $infoCreneau){
+            $creneau = $infoCreneau['creneau'];
+            // Vérifiez si la plage horaire est disponible
+            if ($creneau->isIsAvailable()) {
+                // Mettez à jour la plage horaire comme réservée
+                $creneau->setIsAvailable(false);
+        
+                // Définissez l'élève qui a réservé la plage horaire 
+                $user = $this->getUser(); // Supposons que vous avez implémenté l'authentification de l'utilisateur
+                $creneau->setUserEleve($user);
+                $entityManager->persist($creneau);        
+            }     
+        }
+
+        $entityManager->flush();
+        $cart->remove();
+        $this->addFlash('success', 'Vos créneaux sont validés.'); 
+         
+        // Redirigez vers la page de la liste ou toute autre page appropriée
+        return $this->redirectToRoute('app_creneaux_index'); 
+    }
+
     #[Route('/creneaux/{id}/cancel', name: 'app_cancel', methods: ['GET'])]
     public function cancel(Creneaux $creneaux, EntityManagerInterface $entityManager): Response
     {
@@ -162,37 +190,5 @@ class CreneauxController extends AbstractController
 
 
 
-// ***********************************************
-
-
-
-//     #[Route('/creneaux/{id}/cancel', name: 'app_cancel', methods: ['GET'])]
-//     public function cancel(Creneaux $creneaux, EntityManagerInterface $entityManager): Response
-//     {
-//         // Vérifiez si l'utilisateur connecté a réservé cette plage horaire
-//         $user = $this->getUser();
-//         if ($user && $creneaux->getUserEleve() === $user) {
-//             // Annulez la réservation en mettant à jour la plage horaire comme disponible
-//             $creneaux->setIsAvailable(true);
-//             $creneaux->setUserEleve(null); // Définissez l'élève comme null
-    
-//             $entityManager->flush();
-    
-//             // Redirigez vers la page de la liste ou toute autre page appropriée
-//             return $this->redirectToRoute('app_creneaux_index');
-//         }
-    
-//         // Gérez le cas où l'utilisateur n'est pas autorisé à annuler cette réservation
-//         // Vous pouvez personnaliser cette partie en fonction de vos besoins
-//         $this->addFlash('error', 'Vous n\'êtes pas autorisé à annuler cette réservation.');
-    
-//         // Redirigez vers la page de la liste ou toute autre page appropriée
-//         return $this->redirectToRoute('app_creneaux_index');
-// }
-
-
-// *************************************************
 
    
-
-

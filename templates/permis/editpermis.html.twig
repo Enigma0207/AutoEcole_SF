@@ -21,6 +21,11 @@
 {% block title %}Modifier les permis{% endblock %}
 
 {% block body %}
+    {% if 'ROLE_ADMIN' not in app.user.roles %}
+            <div class="alert alert-danger" role="alert">
+                Vous n'avez pas les droits d'accéder à cette page.
+            </div>
+    {% else %}
     <div class="permisForm">
         {{ form_start(form) }}
     
@@ -81,4 +86,5 @@
          </div>
         {{ form_end(form) }}
     </div>
+    {% endif %}
 {% endblock %}

@@ -50,13 +50,13 @@
                                 {% if 'ROLE_ADMIN' in app.user.roles %}
                                     <a href="{{ path('app_creneaux_edit', {'id': creneau.id}) }}">Modifier</a>
                                     <a href="{{ path('app_creneaux_show', {'id': creneau.id}) }}">Afficher</a>
-                                {% elseif 'ROLE_MONITEUR' in app.user.roles %}
-                                    {# <a href="{{ path('app_creneaux_show', {'id': creneau.id}) }}">Afficher</a> #}
+                                {# {% elseif 'ROLE_MONITEUR' in app.user.roles %} #}
                                 {% elseif 'ROLE_ELEVE' in app.user.roles %}
                                     {% if creneau.isAvailable %}
                                         <a href="{{ path('add_to_cart', {'id': creneau.id}) }}">Réserver</a>
                                     {% else %}
-                                        <a href="{{ path('app_cancel', {'id': creneau.id}) }}">Annuler</a>
+                                        {# <a href="{{ path('app_cancel', {'id': creneau.id}) }}">Annuler</a> #}
+                                        Réservé
                                     {% endif %}
                                 {% endif %}
                             </td>
@@ -69,8 +69,14 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div class="crenauxA">
+        <div class="crenauxA">          
+            {% if 'ROLE_ADMIN' in app.user.roles %}
             <a href="{{ path('app_creneaux_new') }}">Create new</a>
+                                    
+            {% elseif 'ROLE_ELEVE' in app.user.roles %}
+             <a href="{{ path('cart') }}">Voir Mon Panier</a>
+            {% endif %}
+             
         </div>
     </div>
 {% endblock %}

@@ -82,4 +82,25 @@ class CartController extends AbstractController
         $cart->remove();
         return $this->redirectToRoute('app_creneaux_index');
     }
+    
+  
+    /**
+     *  essaie pour bouton panier!!!!
+     *
+     * @param Cart $cart
+     * @return Response
+     */
+    #[Route('/panier/details', name: 'cart_details')]
+    public function details(Cart $cart): Response
+    {
+        $cartDetails = $cart->getDetails();
+
+        return $this->render('cart/cart_details.html.twig', [
+            'cart' => $cartDetails['creneaux'],
+            'totalQuantity' => $cartDetails['totals']['quantity'],
+            'totalPrice' => $cartDetails['totals']['price']
+        ]);
+    }
+
+
 }

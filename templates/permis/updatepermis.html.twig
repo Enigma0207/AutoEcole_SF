@@ -3,6 +3,11 @@
 {% block title %}Mettre à jour le permis{% endblock %}
 
 {% block body %}
+    {% if 'ROLE_ADMIN' not in app.user.roles %}
+        <div class="alert alert-danger" role="alert">
+            Vous n'avez pas les droits d'accéder à cette page.
+        </div>
+    {% else %}
     <h2>Mettre à jour le permis</h2>
     {{ form_start(form, {'method': 'POST'}) }}
         
@@ -11,4 +16,6 @@
     {{ form_end(form) }}
     
     <a href="{{ path('app_permisliste') }}">list</a>
+    {% endif %}
+
 {% endblock %}

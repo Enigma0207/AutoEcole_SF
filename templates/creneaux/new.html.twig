@@ -3,6 +3,11 @@
 {% block title %}New Creneaux{% endblock %}
 
 {% block body %}
+{% if 'ROLE_ADMIN' not in app.user.roles %}
+        <div class="alert alert-danger" role="alert">
+            Vous n'avez pas les droits d'accéder à cette page.
+        </div>
+{% else %}
  <div class="newGenerale">
     <h4>Creneaux Form</h4>
     {# <a href="{{ path('app_creneaux_index') }}"><span>&#128412;</span>List</a> #}
@@ -11,4 +16,6 @@
 
     <a href="{{ path('app_creneaux_index') }}"><span>&#128412;</span>List</a>
  </div>
+{% endif %}
+
 {% endblock %}

@@ -20,6 +20,12 @@ nav{
  margin: 0 15px;
 
 }
+
+.lienPanier{ 
+    position:relative;
+    bottom: 3px;
+}
+
 /******Nav ADMIN*************/
 .admin-link {
             position: relative;
@@ -445,7 +451,8 @@ th{
 padding-top: 5px;
     margin: auto;
     width: 280px;
-    margin-right: 54px;
+    margin-right: 88px;
+    padding-bottom: 7px;
 }
 .crenauxtable a, .crenauxA a {
      text-decoration: none; 
@@ -593,5 +600,15 @@ footer{
  footer h4{
      margin: 1px;
  }
- 
+ /* MON PANIER */
+ .panier{
+    width: 35%;
+    margin: auto;
+    text-align: center;  
+    background-color: rgba(160, 160, 167, 0.151);
+    margin-top: 30px;
+    padding-top: 4px;
+    padding-bottom: 10px;
+
+}
 

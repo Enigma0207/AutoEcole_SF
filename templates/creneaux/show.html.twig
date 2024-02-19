@@ -3,6 +3,11 @@
 {% block title %}Créneaux{% endblock %}
 
 {% block body %}
+{% if 'ROLE_ADMIN' not in app.user.roles %}
+        <div class="alert alert-danger" role="alert">
+            Vous n'avez pas les droits d'accéder à cette page.
+        </div>
+{% else %}
    <div class="showCreneaux" >
         <h4 >Détail Creneau</h4>
         <table >
@@ -19,6 +24,7 @@
                     <th>Moniteur</th>
                     <td>{{ creneaux.user.firstname }}</td>
                 </tr>
+           
                 <tr>
                     <th>Permis Type</th>
                     <td>{{ creneaux.permis.type }}</td>
@@ -35,5 +41,5 @@
         </div>
         {{ include('creneaux/_delete_form.html.twig') }}
   </div>
-
+{% endblock %}
 {% endblock %}
